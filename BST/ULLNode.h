@@ -15,15 +15,18 @@
 #endif /* ULLNode_h */
 
 class ULLNode {
-    BSTNode* data;
-    ULLNode* next;
+    BSTNode* _value;
+    ULLNode* _next;
+    ULLNode* _previous;
 public:
     ULLNode();
-    ULLNode(BSTNode* data);
-    void setData(BSTNode* data);
-    BSTNode* getData();
-    void setNext(ULLNode* node);
+    ULLNode(BSTNode* value);
+    void setValue(BSTNode* value);
+    BSTNode* getValue();
+    void setNext(ULLNode* next);
     ULLNode* getNext();
+    void setPrevious(ULLNode* previous);
+    ULLNode* getPrevious();
     void clearNode();
     friend ostream& operator<<(ostream& os, ULLNode* node);
 };

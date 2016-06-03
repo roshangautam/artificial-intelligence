@@ -3,61 +3,62 @@
 //  BST
 //
 //  Created by Roshan Gautam on 6/1/16.
-//  Copyright © 2016 Roshan Gautam. All rights reserved.
+//  Copy_right © 2016 Roshan Gautam. All _rights reserved.
 //
 
 #include "BSTNode.h"
 
-
+// Default Constructor - initialize everything to zero
 BSTNode::BSTNode() {
-    data = 0;
-    left = NULL;
-    right = NULL;
+    _value = 0;
+    _left = NULL;
+    _right = NULL;
 }
 
+// Initializer Constructor - initialize value
 BSTNode::BSTNode(int value) {
-    data = value;
-    left = NULL;
-    right = NULL;
+    _value = value;
+    _left = NULL;
+    _right = NULL;
 }
 
-int BSTNode::getData() {
-    return data;
+int BSTNode::getValue() {
+    return _value;
 }
 
-void BSTNode::setData(int value) {
-    data = value;
+void BSTNode::setValue(int value) {
+    _value = value;
 }
 
-void BSTNode::setLeft(BSTNode* BSTNode) {
-    left = BSTNode;
+void BSTNode::setLeft(BSTNode* left) {
+    _left = left;
 }
 
-void BSTNode::setRight(BSTNode* BSTNode) {
-    right = BSTNode;
+void BSTNode::setRight(BSTNode* right) {
+    _right = right;
 }
 
 BSTNode* BSTNode::getLeft() {
-    return left;
+    return _left;
 }
 
 BSTNode* BSTNode::getRight() {
-    return right;
+    return _right;
 }
 
 ostream& operator<<(ostream& os, BSTNode* node) {
     if(node) {
-        if(node->getLeft())
-            cout << node->getLeft()->getData() << " <-- ";
-        else
-            cout << "NULL " << " <-- ";
+//        if(node->getLeft())
+//            cout << node->getLeft()->getValue() << " <-- ";
+//        else
+//            cout << "NULL " << " <-- ";
         
-        os << node->getData() ;
+        os << node->getValue() ;
         
-        if(node->getLeft())
-            cout << " --> " << node->getRight()->getData() ;
-        else
-            cout  << " --> " << "NULL" << " ";
+//        if(node->getLeft())
+//            cout << " --> " << node->getRight()->getValue() ;
+//        else
+//            cout  << " --> " << "NULL" << " ";
     } else
         os << "Empty BSTNode" << "\n";
     return os;

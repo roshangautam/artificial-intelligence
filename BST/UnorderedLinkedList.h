@@ -18,14 +18,14 @@
 
 
 class UnorderedLinkedList {
-    ULLNode* head;
-    ULLNode* tail;
+    ULLNode* _head;
+    ULLNode* _tail;
 public:
     UnorderedLinkedList();
     ULLNode* getHead();
     ULLNode* getTail();
-    bool addAtHead(BSTNode* node);
-    bool addAtTail(BSTNode* node);
+    bool addAtHead(BSTNode* value);
+    bool addAtTail(BSTNode* value);
     bool removeFromHead(BSTNode*& node);
     bool removeFromTail(BSTNode*& node);
     bool empty();

@@ -9,39 +9,48 @@
 #include "ULLNode.h"
 
 ULLNode::ULLNode() {
-    data = NULL;
-    next = NULL;
+    _value = NULL;
+    _next = NULL;
 }
 
 ULLNode::ULLNode(BSTNode* value) {
-    data = value;
-    next = NULL;
+    _value = value;
+    _next = NULL;
 }
 
-BSTNode* ULLNode::getData() {
-    return data;
+BSTNode* ULLNode::getValue() {
+    return _value;
 }
 
-void ULLNode::setData(BSTNode *value) {
-    data = value;
+void ULLNode::setValue(BSTNode *value) {
+    _value = value;
 }
 
 ULLNode* ULLNode::getNext() {
-    return next;
+    return _next;
 }
 
-void ULLNode::setNext(ULLNode *node) {
-    next = node;
+void ULLNode::setNext(ULLNode *next) {
+    _next = next;
+}
+
+ULLNode* ULLNode::getPrevious() {
+    return _previous;
+}
+
+void ULLNode::setPrevious(ULLNode *previous) {
+    _previous = previous;
 }
 
 void ULLNode::clearNode() {
-    next = NULL;
-    data = NULL;
+    _next = NULL;
+    _value = NULL;
+    _previous = NULL;
 }
 
 ostream& operator<<(ostream& os, ULLNode* node) {
     if(node) {
-        os << node->getData()->getData();
+        os << node->getValue()->getValue();
     } else
         os << "Empty ULLNode" << "\n";
     return os;

@@ -17,7 +17,7 @@ void Queue::enqueue(BSTNode *node) {
 }
 
 BSTNode* Queue::dequeue() {
-    BSTNode* top = getHead()->getData();
+    BSTNode* top = getHead()->getValue();
     removeFromHead(top);
     return top;
 }

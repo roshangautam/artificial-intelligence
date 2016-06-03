@@ -17,19 +17,19 @@ using namespace std;
 
 class BSTNode {
     
-    int data;
-    BSTNode* left;
-    BSTNode* right;
+    int _value; // actual node value
+    BSTNode* _left; // left pointer
+    BSTNode* _right; // right pointer
     
 public:
     
-    BSTNode();
-    BSTNode(int value);
-    int getData();
-    void setData(int value);
-    void setLeft(BSTNode* node);
-    void setRight(BSTNode* node);
-    BSTNode* getLeft();
-    BSTNode* getRight();
-    friend ostream& operator<<(ostream& os, BSTNode* node);
+    BSTNode(); //default constructor
+    BSTNode(int value); // intializer constructor
+    int getValue(); // return node value
+    void setValue(int value); // set node value
+    void setLeft(BSTNode* left); // set left pointer
+    void setRight(BSTNode* right); // set right pointer
+    BSTNode* getLeft(); // get left pointer
+    BSTNode* getRight(); // get right pointer
+    friend ostream& operator<<(ostream& os, BSTNode* node); // overloading cout for easy printing
 };

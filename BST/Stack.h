@@ -20,4 +20,5 @@ public:
     Stack();
     void push(BSTNode*);
     BSTNode* pop();
+    BSTNode* peek();
 };

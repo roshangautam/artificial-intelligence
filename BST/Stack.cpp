@@ -18,7 +18,12 @@ void Stack::push(BSTNode *node) {
 }
 
 BSTNode* Stack::pop() {
-    BSTNode* top = getHead()->getData();
+    BSTNode* top = getHead()->getValue();
     removeFromHead(top);
+    return top;
+}
+
+BSTNode* Stack::peek() {
+    BSTNode* top = getHead()->getValue();
     return top;
 }

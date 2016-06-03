@@ -13,37 +13,38 @@
 
 using namespace std;
 
+//Forward declarations for some common handy functions
 void insert();
 void search();
-void read();
-void display();
-void render(int*, char**);
+void load();
 
+//Binary Tree Global object
 BinarySearchTree *tree;
-
 
 int main(int argc, char **argv) {
     
-    char c;
+    char c; //menu input
     
     std::cout << "Binary Search Tree!\n";
     
-    tree = new BinarySearchTree();
-    read();
+    tree = new BinarySearchTree(); // create a new instance of BST
     
+    load(); //load data from a file and build a binary tree
+    
+    // Menu Options
     while(true) {
         
-        cout << "Select an option (1-5) OR press Q to quit" << "\n";
+        cout << "Select an option (1-5) OR press Q to quit" << endl;
         
-        cout << "1. Insert Node" << "\n";
+        cout << "1. Insert Node" << endl;
         
-        cout << "2. Search Node" << "\n";
+        cout << "2. Search Node" << endl;
         
-        cout << "3. Depth Fist Traversal" << "\n";
+        cout << "3. Depth Fist Traversal - Preorder" << endl;
+        cout << "4. Depth Fist Traversal - Inorder" << endl;
+        cout << "5. Depth Fist Traversal - Postorder" << endl;
         
-        cout << "4. Breadth Fist Traversal" << "\n";
-        
-        cout << "5. Render Tree" << "\n";
+        cout << "6. Breadth Fist Traversal" << endl;
         
         cin >> c;
         
@@ -63,28 +64,40 @@ int main(int argc, char **argv) {
                 
             case '3':
                 
-                cout << "Depth First Traversal" << "\n";
+                cout << "Depth First Traversal - Preorder" << endl;
                 
-                tree->dftRecursivePostorder(tree->getRoot());
+                tree->dftIterativePreorder();
                 
                 break;
                 
             case '4':
                 
-                tree->bft();
+                cout << "Depth First Traversal - Inorder" << endl;
+                
+                tree->dftIterativeInorder();
                 
                 break;
                 
             case '5':
                 
-                render(&argc, argv);
+                cout << "Depth First Traversal - Postorder" << endl;
+                
+                tree->dftIterativePostorder();
+                
+                break;
+                
+            case '6':
+                
+                cout << "Breadth First Traversal" << endl;
+                
+                tree->bft();
                 
                 break;
                 
             case 'Q':
             case 'q':
                 
-                cout << "Thats all folks" << "\n";
+                cout << "Thats all folks" << endl;
                 
                 exit(0);
                 
@@ -99,6 +112,7 @@ int main(int argc, char **argv) {
     return 0;
 }
 
+// Reads user input and inserts that onto global tree instance
 void insert() {
     
     int data;
@@ -108,12 +122,13 @@ void insert() {
     cin >> data;
     
     if(tree->insert(data))
-        cout << data << " inserted successfully" << "\n";
+        cout << data << "Inserted successfully" << endl;
     else
-        cout << "Insertion Failed" << "\n";
+        cout << "Insertion Failed" << endl;
     
 }
 
+// Reads user input and tries to find it in the tree
 void search() {
     
     int data;
@@ -126,15 +141,15 @@ void search() {
     
     if(result)
         
-        cout << "Result: " << result->getData() << "\n";
+        cout << "Result: " << result->getValue() << endl;
     
     else
         
-        cout << "No Results found" << "\n";
+        cout << "No Results found" << endl;
 }
 
-
-void read() {
+// Load a list of data from a data file to tree
+void load() {
     
     ifstream file("data.txt");
     
@@ -147,34 +162,11 @@ void read() {
             tree->insert(a);
         }
         
-        cout << "Tree Generated from data file" << "\n";
+        cout << "Tree Generated from data file" << endl;
         
         file.close();
         
     } else {
-        cout << "Can not open data file" << "\n";
+        cout << "Can not open data file" << endl;
     }
-}
-
-void display() {
-    glClearColor (0.0,0.0,0.0,1.0);
-    glClear (GL_COLOR_BUFFER_BIT);
-    glLoadIdentity();
-    glTranslatef(0,10,-30);
-    glColor3f(1,1,1);
-    tree->draw(tree->getRoot(), 0, 0, 0);
-    glutSwapBuffers();
-}
-
-void render(int *argc, char **argv) {
-    glutInit(argc, argv);
-    glutInitWindowSize(2880, 1800);
-    glutInitDisplayMode(GLUT_DOUBLE);
-    glutCreateWindow("Binary Search Tree");
-    glutReshapeFunc(tree->reshape);
-    glutDisplayFunc(display);
-    glutKeyboardFunc (tree->keyboard);
-    glClearColor(0,0,0,1);
-    glDisable(GL_DEPTH_TEST);
-    glutMainLoop();
 }
