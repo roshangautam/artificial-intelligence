@@ -14,10 +14,10 @@
 
 #endif /* Stack_h */
 
-
+// Inherits UnorderedLinkedList
 class Stack : public UnorderedLinkedList {
 public:
-    Stack();
+    Stack(); 
     void push(BSTNode*);
     BSTNode* pop();
     BSTNode* peek();

@@ -10,20 +10,23 @@
 
 
 Stack::Stack() {
-    UnorderedLinkedList();
+    cout << "Stack Initialized" << endl;
 }
 
 void Stack::push(BSTNode *node) {
+	//add to the head of the list
     addAtHead(node);
 }
 
 BSTNode* Stack::pop() {
+	// remove from head of the list
     BSTNode* top = getHead()->getValue();
     removeFromHead(top);
     return top;
 }
 
 BSTNode* Stack::peek() {
+	// take a peek on the top of the list
     BSTNode* top = getHead()->getValue();
     return top;
 }

@@ -23,30 +23,37 @@ BSTNode::BSTNode(int value) {
 }
 
 int BSTNode::getValue() {
+    // returns informational content, integer value
     return _value;
 }
 
 void BSTNode::setValue(int value) {
+    // sets informational content
     _value = value;
 }
 
 void BSTNode::setLeft(BSTNode* left) {
+    // sets left point
     _left = left;
 }
 
 void BSTNode::setRight(BSTNode* right) {
+    // sets right pointer 
     _right = right;
 }
 
 BSTNode* BSTNode::getLeft() {
+    // returns left pointer
     return _left;
 }
 
 BSTNode* BSTNode::getRight() {
+    // returns right pointer
     return _right;
 }
 
 ostream& operator<<(ostream& os, BSTNode* node) {
+    // operator overloading to easily cout a node, formatted printing commented out
     if(node) {
 //        if(node->getLeft())
 //            cout << node->getLeft()->getValue() << " <-- ";

@@ -18,7 +18,7 @@
 
 class BinarySearchTree {
 
-    BSTNode* _root;
+    BSTNode* _root; // structural content, root of the tree
     
 public:
     

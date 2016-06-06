@@ -18,8 +18,8 @@
 
 
 class UnorderedLinkedList {
-    ULLNode* _head;
-    ULLNode* _tail;
+    ULLNode* _head; // structural content, points to the head of the list
+    ULLNode* _tail; // structural content, points to the tail of the list
 public:
     UnorderedLinkedList();
     ULLNode* getHead();

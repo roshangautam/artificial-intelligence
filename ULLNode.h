@@ -15,9 +15,9 @@
 #endif /* ULLNode_h */
 
 class ULLNode {
-    BSTNode* _value;
-    ULLNode* _next;
-    ULLNode* _previous;
+    BSTNode* _value; // informational content
+    ULLNode* _next; // structural content
+    ULLNode* _previous; //structural content, this one makes the list a doubly linked list
 public:
     ULLNode();
     ULLNode(BSTNode* value);

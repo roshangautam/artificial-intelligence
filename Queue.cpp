@@ -9,15 +9,17 @@
 #include "Queue.h"
 
 Queue::Queue() {
-    UnorderedLinkedList();
+    cout << "Queue Initialized" << endl;
 }
 
 void Queue::enqueue(BSTNode *node) {
+	// add at the tail of the list
     addAtTail(node);
 }
 
 BSTNode* Queue::dequeue() {
-    BSTNode* top = getHead()->getValue();
+	// remove from the head of the list
+    BSTNode* top = NULL;
     removeFromHead(top);
     return top;
 }

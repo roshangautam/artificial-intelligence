@@ -12,10 +12,10 @@
 #include "UnorderedLinkedList.h"
 #endif /* Queue_h */
 
+// Inherits UnorderedLinkedList
 class Queue : public UnorderedLinkedList {
 public:
     Queue();
     void enqueue(BSTNode*);
     BSTNode* dequeue();
-    
 };
