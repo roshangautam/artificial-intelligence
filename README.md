@@ -3,7 +3,7 @@ ARTIFICIAL INTELLIGENCE - CS 5433 - 002 - Assignments
 
 - [Binary Search Tree] (https://github.com/roshangautam/artificial-intelligence/tree/binary-search-tree) - Binary Search Tree Implementation using unordered linked list in c++
 
-- [Graphical Binary Search Tree] (https://github.com/roshangautam/artificial-intelligence/tree/binary-search-tree) - Binary Search Tree Implementation using unordered linked list in c++, opengl and glut. X-Code project.
+- [Graphical Binary Search Tree] (https://github.com/roshangautam/artificial-intelligence/tree/graphical-binary-search-tree) - Binary Search Tree Implementation using unordered linked list in c++, opengl and glut. X-Code project.
 
 - [Sets] (https://github.com/roshangautam/artificial-intelligence/tree/sets) - Implementation of SETS in c++
 
