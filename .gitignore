@@ -1,3 +1,1 @@
-*.o
-*.dsym
-BST
+.DS_Store
