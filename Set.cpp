@@ -6,7 +6,7 @@ Set::Set() {
 }
 
 void Set::clear() {
-	for (int i = 0; i < 9; ++i)
+	for (int i = 0; i < UNIVERSE; ++i)
 	{
 		elements[i] = false;
 	}
@@ -27,7 +27,7 @@ void Set::operator += (int i) {
 
 int Set::cardinality() const {
 	int cardinality = 0;
-	for (int i = 0; i <= 9; ++i)
+	for (int i = 0; i <= UNIVERSE; ++i)
 	{
 		if(elements[i]) cardinality++ ;
 	}
@@ -37,7 +37,7 @@ int Set::cardinality() const {
 void Set::print() {
 	int total = cardinality();
 	cout << '{';
-	for (int i = 0; i <= 9; ++i)
+	for (int i = 0; i <= UNIVERSE; ++i)
 	{
 		if(elements[i]) {
 			cout << i;
@@ -50,7 +50,7 @@ void Set::print() {
 
 Set Set::operator + (const Set& rhSet) const {
 	Set result;
-	for (int i = 0; i <= 9; ++i)
+	for (int i = 0; i <= UNIVERSE; ++i)
 	{
 		if(elements[i] || rhSet.getElement(i)) result += i;
 	}
@@ -59,7 +59,7 @@ Set Set::operator + (const Set& rhSet) const {
 
 Set Set::operator - (const Set& rhSet) const {
 	Set result;
-	for (int i = 0; i <= 9; ++i)
+	for (int i = 0; i <= UNIVERSE; ++i)
 	{
 		if(elements[i] && !rhSet.getElement(i)) result += i;
 	}
@@ -68,7 +68,7 @@ Set Set::operator - (const Set& rhSet) const {
 
 Set Set::intersect(const Set& rhSet) const {
 	Set result;
-	for (int i = 0; i <= 9; ++i)
+	for (int i = 0; i <= UNIVERSE; ++i)
 	{
 		if(elements[i] && rhSet.getElement(i)) result += i;
 	}
@@ -77,7 +77,7 @@ Set Set::intersect(const Set& rhSet) const {
 
 Set Set::complement() const {
 	Set result;
-	for (int i = 0; i <= 9; ++i)
+	for (int i = 0; i <= UNIVERSE; ++i)
 	{
 		if(!elements[i]) result += i;
 	}

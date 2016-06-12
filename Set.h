@@ -2,8 +2,10 @@
 
 using namespace std;
 
+const int UNIVERSE = 5; 
+
 class Set {
-	bool elements[10];
+	bool elements[UNIVERSE];
 public:
 	Set();	
 	bool getElement(int) const;
