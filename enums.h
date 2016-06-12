@@ -1,13 +1,3 @@
-typedef enum {PROBLEM}
-{
-    NATIONALITY = 0,
-    DRINKS = 1,
-    PETS = 2,
-    COLORS = 3,
-    POSITION = 4,
-    CIGRATTES = 5
-};
-
 typedef enum {NATIONALITY}
 {
     ENGLISH = 0,
@@ -35,7 +25,7 @@ typedef enum {DRINKS}
     OJ = 4
 };
 
-typedef enum {CIGRATTES}
+typedef enum {CIGARETTES}
 {
     OLD_GOLDS = 0,
     KOOKS = 1,
