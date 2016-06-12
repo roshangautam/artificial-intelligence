@@ -9,6 +9,8 @@
 
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
+
 #include "BinarySearchTree.h"
 
 using namespace std;
@@ -17,6 +19,9 @@ using namespace std;
 void insert();
 void search();
 void load();
+void generate();
+void breadthFirstSearch();
+void depthFirstSearch();
 
 //Binary Tree Global object
 BinarySearchTree *tree;
@@ -45,7 +50,11 @@ int main(int argc, char **argv) {
         cout << "5. Depth Fist Traversal - Postorder" << endl;
         
         cout << "6. Breadth Fist Traversal" << endl;
-        
+
+        cout << "7. Generate a tree with random numbers" << endl;
+        cout << "8. Search a node using BFS" << endl;
+        cout << "9. Search a node using DFS" << endl;
+
         cin >> c;
         
         switch (c) {
@@ -93,6 +102,26 @@ int main(int argc, char **argv) {
                 tree->bft();
                 
                 break;
+
+            case '7':
+                
+                cout << "Generating Tree with random Numbers:" << endl;
+                
+                generate();
+                
+                break; 
+
+            case '8':
+                
+                breadthFirstSearch();
+                
+                break;  
+
+            case '9':
+                
+                depthFirstSearch();
+                
+                break;                                                
                 
             case 'Q':
             case 'q':
@@ -170,3 +199,57 @@ void load() {
         cout << "Can not open data file" << endl;
     }
 }
+
+
+//generate a tree with random numbers, ask the user to input the seed first
+void generate() {
+
+    int nodes, seed, start, end;
+
+    cout << "Enter number of nodes to be generated:";
+    cin >> nodes;
+
+    cout << "Enter the seed value to generate random numbers:";
+    cin >> seed;
+
+    cout << "Enter the starting value of range:";
+    cin >> start;
+
+    cout << "Enter the ending value of range:";
+    cin >> end;
+
+    // set the seed to randomizer
+    srand(seed);
+    
+    // create an empty binary search tree
+    tree = new BinarySearchTree();
+
+    for (int i = 0; i < nodes; ++i)
+    {
+        int num = (rand() % end) + start;
+        tree->insert(num);
+    }
+    
+}
+
+void breadthFirstSearch() {
+    int value;
+
+    cout << "Enter the value to search:";
+    cin >> value;
+
+    tree->breadthFirstSearch(value);
+}
+
+void depthFirstSearch() {
+    int value;
+
+    cout << "Enter the value to search:";
+    cin >> value;
+
+    tree->depthFirstSearch(value);
+}
+
+
+
+

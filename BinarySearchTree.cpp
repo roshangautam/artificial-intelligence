@@ -41,6 +41,124 @@ BSTNode* BinarySearchTree::search(int value) {
     return found;
 }
 
+void BinarySearchTree::depthFirstSearch(int value) {
+    //variable to count iterations
+    int iterations = 0;
+
+    // variable to keep track if we the node has been found or not
+    bool found = false;
+
+    // Start from the root
+    BSTNode* node = _root;
+
+    // Create a new stack
+    Stack* stack = new Stack();
+
+    // Temp variable to track what node was visited recently
+    BSTNode* lastVisitedNode = NULL;
+    
+
+    // while stack is not empty OR current node is not null
+    while(!stack->empty() || node != NULL) {
+
+        // Haven't found the node yet, increment iteration count
+        iterations++;  
+
+        // if node is not null
+        if(node != NULL) {
+            
+            // push it to the stack
+            stack->push(node);
+            
+            // make the left pointer current node
+            node = node->getLeft();
+
+        } else { // if node is null
+            
+            // see whats on top
+            BSTNode* peekNode = stack->peek();
+            
+
+            // if the top most nodes right pointer is not null and the right node is not the one we visted last
+            if(peekNode->getRight() != NULL && lastVisitedNode != peekNode->getRight()) {
+                
+                // make the current node the right pointer of whats on top of the stack
+                node = peekNode->getRight();
+          
+
+            } else {
+                
+                if(peekNode->getValue() == value) {
+
+                    //output the node
+                    cout << endl << "Node with value " << peekNode << " found in " << iterations << " iterations" << endl << endl;
+
+                    // set found to true
+                    found = true;
+
+                    //break while loop
+                    break;
+                }                
+
+                // pop and make it the last visited node
+                lastVisitedNode = stack->pop();
+            }
+        }
+    }
+    // we didnt find anything
+    if(!found)
+        cout << "UNKNOWN : " << value << ". No such node exists." << endl;    
+}
+
+void BinarySearchTree::breadthFirstSearch(int value) {
+    //variable to count iterations
+    int iterations = 0;
+
+    // variable to keep track if we the node has been found or not
+    bool found = false;
+
+    // Start from the root
+    BSTNode *node = _root;
+    
+    //Create a new queue
+    Queue* queue = new Queue();
+
+    // push the root the queue
+    queue->enqueue(node);
+
+    // while the queue is not empty
+    while (!queue->empty()) {
+
+        //node not found yet, increment iterations
+        iterations++;
+
+        // dequeue and print the top node
+        node = queue->dequeue();
+
+        if(node->getValue() == value) {
+
+            //output the node
+            cout << endl << "Node with value " << node << " found in " << iterations << " iterations" << endl << endl;
+
+            // set found to true
+            found = true;
+
+            //break while loop
+            break;
+        }
+
+        // Check for left
+        if (node->getLeft() != NULL) queue->enqueue(node->getLeft()); // push the left node to the queue
+        
+        // Check for right
+        if (node->getRight() != NULL) queue->enqueue(node->getRight()); // push the righ node to the queue
+    }
+
+    // we didnt find anything
+    if(!found)
+        cout << "UNKNOWN : " << value << ". No such node exists." << endl;
+}
+
 BSTNode* BinarySearchTree::getRoot() {
     // return root of this tree
     return _root;
@@ -85,6 +203,7 @@ bool BinarySearchTree::insert(int value) {
     
     return true;
 }
+
 // Postorder traversal of the tree
 void BinarySearchTree::dftIterativePostorder() {
     // Start from the root
@@ -206,10 +325,6 @@ void BinarySearchTree::dftIterativeInorder() {
         }
     }
 }
-
-
-
-
 
 void BinarySearchTree::dftRecursiveInorder(BSTNode *current) {
     
