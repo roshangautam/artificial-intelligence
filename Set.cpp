@@ -2,7 +2,10 @@
 #include "Set.h"
 
 Set::Set() {
-	clear();
+	for (int i = 0; i < UNIVERSE; ++i)
+	{
+		elements[i] = true;
+	}
 }
 
 void Set::clear() {
