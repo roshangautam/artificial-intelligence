@@ -59,10 +59,7 @@ void BinarySearchTree::depthFirstSearch(int value) {
     
 
     // while stack is not empty OR current node is not null
-    while(!stack->empty() || node != NULL) {
-
-        // Haven't found the node yet, increment iteration count
-        iterations++;  
+    while(!stack->empty() || node != NULL) { 
 
         // if node is not null
         if(node != NULL) {
@@ -87,6 +84,9 @@ void BinarySearchTree::depthFirstSearch(int value) {
           
 
             } else {
+
+                // Haven't found the node yet, increment iteration count
+                iterations++; 
                 
                 if(peekNode->getValue() == value) {
 
