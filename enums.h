@@ -6,8 +6,9 @@ typedef enum {NATIONALITY}
     JAPANESE = 3,
     NORWEGIAN = 4
 };
+const char* nationalities = { 'English', 'Spanish', 'Ukranian', 'Japanese', 'Norwegian'};
 
-typedef enum {PETS}
+typedef enum {PET}
 {
     DOG = 0,
     HORSE = 1,
@@ -15,8 +16,9 @@ typedef enum {PETS}
     ZEBRA = 3,
     SNAILS = 4
 };
+const char* pets = { 'Dog', 'Horse', 'Fox', 'Zebra', 'Snails'};
 
-typedef enum {DRINKS}
+typedef enum {DRINK}
 {
     COFFEE = 0,
     TEA = 1,
@@ -24,15 +26,17 @@ typedef enum {DRINKS}
     MILK = 3,
     OJ = 4
 };
+const char* drinks = { 'Coffee', 'Tea', 'Water', 'Milk', 'OJ'};
 
-typedef enum {CIGARETTES}
+typedef enum {CIGARETTE}
 {
     OLD_GOLDS = 0,
-    KOOKS = 1,
+    KOOLS = 1,
     CHESTERFIELDS = 2,
     LUCKY_STRIKE = 3,
     PARLIAMENTS = 4
 };
+const char* cigarettes = { 'Old Golds', 'Kools', 'Chesterfields', 'Luck Strike', 'Parliaments'};
 
 typedef enum {POSITION}
 {
@@ -42,8 +46,9 @@ typedef enum {POSITION}
     FOURTH = 3,
     FIFTH = 4
 };
+const char* positions = { 'First', 'Second', 'Third', 'Fourth', 'Fifth'};
 
-typedef enum {COLORS}
+typedef enum {COLOR}
 {
     GREEN = 0,
     RED = 1,
@@ -51,3 +56,7 @@ typedef enum {COLORS}
     YELLOW = 3,
     WHITE = 4
 };
+const char* colors = { 'Green', 'Red', 'Blue', 'Yellow', 'White'};
+
+
+

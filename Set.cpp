@@ -20,7 +20,7 @@ void Set::operator = (int i) {
 	elements[i] = true;
 }
 
-bool Set::getElement(int i) const {
+bool Set::memberOf(int i) const {
 	return elements[i];
 }
 
