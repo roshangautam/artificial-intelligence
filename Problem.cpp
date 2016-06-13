@@ -11,9 +11,17 @@ Problem::Problem() {
 
     //The Spaniard owns the dog.
     petsNationality[DOG] = SPANISH;
+    petsNationality[HORSE] = petsNationality[DOG] - petsNationality[HORSE];
+    petsNationality[SNAILS] = petsNationality[DOG] - petsNationality[SNAILS];
+    petsNationality[FOX] = petsNationality[DOG] - petsNationality[FOX];
+    petsNationality[ZEBRA] = petsNationality[DOG] - petsNationality[ZEBRA];
 
     //Coffee is drunk in the green house.
     drinksColors[COFFEE] = GREEN;
+    drinksColors[MILK] = drinksColors[COFFEE] - drinksColors[MILK];
+    drinksColors[WATER] = drinksColors[COFFEE] - drinksColors[WATER];
+    drinksColors[OJ] = drinksColors[COFFEE] - drinksColors[OJ];
+    drinksColors[TEA] = drinksColors[COFFEE] - drinksColors[TEA];
 
     //The Ukrainian drinks tea.
     drinksNationality[TEA] = UKRANIAN;
