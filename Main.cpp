@@ -10,6 +10,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
+#include <iomanip>
 
 #include "BinarySearchTree.h"
 
@@ -39,7 +40,7 @@ int main(int argc, char **argv) {
     // Menu Options
     while(true) {
         
-        cout << "Select an option (1-5) OR press Q to quit" << endl;
+        cout << "Select an option (1-9) OR press Q to quit" << endl;
         
         cout << "1. Insert Node" << endl;
         
@@ -51,7 +52,7 @@ int main(int argc, char **argv) {
         
         cout << "6. Breadth Fist Traversal" << endl;
 
-        cout << "7. Generate a tree with random numbers" << endl;
+        cout << "7. Generate a tree with random numbers and display retrieval counts" << endl;
         cout << "8. Search a node using BFS" << endl;
         cout << "9. Search a node using DFS" << endl;
 
@@ -204,50 +205,72 @@ void load() {
 //generate a tree with random numbers, ask the user to input the seed first
 void generate() {
 
-    int nodes, seed, start, end;
-
-    cout << "Enter number of nodes to be generated:";
-    cin >> nodes;
+    int nodes, seed, count = 0; 
+    BSTNode* result = NULL;
+    nodes = 1000;
+    // cout << "Enter number of nodes to be generated:";
+    // cin >> nodes;
 
     cout << "Enter the seed value to generate random numbers:";
     cin >> seed;
 
-    cout << "Enter the starting value of range:";
-    cin >> start;
+    // If you want to use a range
+    // int start, end;
+    // cout << "Enter the starting value of range:";
+    // cin >> start;
 
-    cout << "Enter the ending value of range:";
-    cin >> end;
+    // cout << "Enter the ending value of range:";
+    // cin >> end;
 
     // set the seed to randomizer
     srand(seed);
-    
+
+    int values[nodes];
     // create an empty binary search tree
     tree = new BinarySearchTree();
 
     for (int i = 0; i < nodes; ++i)
     {
-        int num = (rand() % end) + start;
-        tree->insert(num);
+        // values[i] = (rand() % end) + start; // to generate a number between a given range
+
+        // generate a random number and store it in array
+        values[i] = rand();
+        // insert it in the tree
+        tree->insert(values[i]);
     }
-    
+    cout<< "Method" << "\t" << "Index" << "\t" << setw(20)   << "Search Value" << "\t" << "Retrieval Count" << endl;
+    for (int i = 1; i < 10; i++)
+    {
+        count = 0;
+        result = tree->breadthFirstSearch(values[i*100], count);
+        cout << "BFS" << "\t" << i*100 << "\t" << setw(20)   << values[i*100] << "\t" << count << endl;    
+        count = 0;    
+        result = tree->depthFirstSearch(values[i*100], count);
+        cout << "DFS" << "\t" << i*100 << "\t" << setw(20)   << values[i*100] << "\t" << count << endl;    
+    }
+
 }
 
 void breadthFirstSearch() {
-    int value;
+    int value, iterations;
 
     cout << "Enter the value to search:";
     cin >> value;
 
-    tree->breadthFirstSearch(value);
+    BSTNode* result = tree->breadthFirstSearch(value,iterations);
+    if(result) cout << result << " found in " << iterations << " iterations." << endl;
+    else cout << value << " not found." << endl;
 }
 
 void depthFirstSearch() {
-    int value;
+    int value, iterations;
 
     cout << "Enter the value to search:";
     cin >> value;
 
-    tree->depthFirstSearch(value);
+    BSTNode* result = tree->depthFirstSearch(value,iterations);
+    if(result) cout << result << " found in " << iterations << " iterations." << endl;
+    else cout << value << " not found." << endl;    
 }
 
 

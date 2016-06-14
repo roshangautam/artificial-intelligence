@@ -10,7 +10,7 @@
 
 
 Stack::Stack() {
-    cout << "Stack Initialized" << endl;
+    // cout << "Stack Initialized" << endl;
 }
 
 void Stack::push(BSTNode *node) {

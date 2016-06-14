@@ -41,12 +41,12 @@ BSTNode* BinarySearchTree::search(int value) {
     return found;
 }
 
-void BinarySearchTree::depthFirstSearch(int value) {
+ BSTNode* BinarySearchTree::depthFirstSearch(int value, int& iterationCount) {
     //variable to count iterations
     int iterations = 0;
 
     // variable to keep track if we the node has been found or not
-    bool found = false;
+    BSTNode* found = NULL;
 
     // Start from the root
     BSTNode* node = _root;
@@ -90,11 +90,8 @@ void BinarySearchTree::depthFirstSearch(int value) {
                 
                 if(peekNode->getValue() == value) {
 
-                    //output the node
-                    cout << endl << "Node with value " << peekNode << " found in " << iterations << " iterations" << endl << endl;
-
-                    // set found to true
-                    found = true;
+                    // set found to this node
+                    found = peekNode;
 
                     //break while loop
                     break;
@@ -105,17 +102,16 @@ void BinarySearchTree::depthFirstSearch(int value) {
             }
         }
     }
-    // we didnt find anything
-    if(!found)
-        cout << "UNKNOWN : " << value << ". No such node exists." << endl;    
+    iterationCount = iterations;
+    return found; 
 }
 
-void BinarySearchTree::breadthFirstSearch(int value) {
+ BSTNode* BinarySearchTree::breadthFirstSearch(int value, int& iterationCount) {
     //variable to count iterations
     int iterations = 0;
 
     // variable to keep track if we the node has been found or not
-    bool found = false;
+     BSTNode* found = NULL;
 
     // Start from the root
     BSTNode *node = _root;
@@ -137,11 +133,8 @@ void BinarySearchTree::breadthFirstSearch(int value) {
 
         if(node->getValue() == value) {
 
-            //output the node
-            cout << endl << "Node with value " << node << " found in " << iterations << " iterations" << endl << endl;
-
-            // set found to true
-            found = true;
+            // set found to this node
+            found = node;
 
             //break while loop
             break;
@@ -153,10 +146,8 @@ void BinarySearchTree::breadthFirstSearch(int value) {
         // Check for right
         if (node->getRight() != NULL) queue->enqueue(node->getRight()); // push the righ node to the queue
     }
-
-    // we didnt find anything
-    if(!found)
-        cout << "UNKNOWN : " << value << ". No such node exists." << endl;
+    iterationCount = iterations;
+    return found;
 }
 
 BSTNode* BinarySearchTree::getRoot() {

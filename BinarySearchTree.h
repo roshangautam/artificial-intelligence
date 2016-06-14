@@ -25,8 +25,8 @@ public:
     BinarySearchTree();
     BinarySearchTree(BSTNode* root);
     BSTNode* search(int value);
-    void depthFirstSearch(int value);
-    void breadthFirstSearch(int value);
+    BSTNode* depthFirstSearch(int, int&);
+    BSTNode* breadthFirstSearch(int, int&);
     BSTNode* getRoot();
     bool insert(int value);
     void dftRecursivePreorder(BSTNode* node);
