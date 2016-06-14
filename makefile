@@ -5,20 +5,21 @@ CPPFLAGS=-g $(shell root-config --cflags)
 LDFLAGS=-g $(shell root-config --ldflags)
 LDLIBS=$(shell root-config --libs)
 
-SRCS=Main.cpp Set.cpp
+SRCS=Main.cpp Set.cpp Problem.cpp
 OBJS=$(subst .cc,.o,$(SRCS))
 
 all: main
 
 main: $(OBJS)
-	$(CXX) $(LDFLAGS) -o Set $(OBJS) $(LDLIBS) 
+	$(CXX) $(LDFLAGS) -o Problem $(OBJS) $(LDLIBS) 
 
-main.o: main.cpp Set.h
+main.o: main.cpp Problem.h
 
+Problem.o: Problem.cpp Set.h Enums.h
 Set.o: Set.cpp
 
 clean:
 	$(RM) $(OBJS)
 
 dist-clean: clean
-	$(RM) Set
+	$(RM) Problem

@@ -1,4 +1,19 @@
-#include<iostream>
+//
+//  Set.h
+//  Zebra-Water Problem
+//
+//  Created by Roshan Gautam on 6/10/16.
+//  Copyright © 2016 Roshan Gautam. All rights reserved.
+//
+
+#pragma once
+
+#ifndef Set_h
+#define Set_h
+
+#include <iostream>
+
+#endif /* Set_h */
 
 using namespace std;
 

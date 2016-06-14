@@ -1,6 +1,21 @@
-#include<iostream>
-#include"set.h"
-#include"enums.h"
+//
+//  Problem.h
+//  Zebra-Water Problem
+//
+//  Created by Roshan Gautam on 6/10/16.
+//  Copyright © 2016 Roshan Gautam. All rights reserved.
+//
+
+#pragma once
+
+#ifndef Problem_h
+#define Problem_h
+
+#include <iostream>
+#include"Set.h"
+#include"Enums.h"
+
+#endif /* Problem_h */
 
 using namespace std;
 

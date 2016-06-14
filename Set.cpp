@@ -1,5 +1,17 @@
+//
+//  Set.cpp
+//  Zebra-Water Problem
+//
+//  Created by Roshan Gautam on 6/10/16.
+//  Copyright © 2016 Roshan Gautam. All rights reserved.
+//
+
+#ifndef Set_cpp
+#define Set_cpp
 
 #include "Set.h"
+
+#endif /* Set_cpp */
 
 Set::Set() {
 	for (int i = 0; i < UNIVERSE; ++i)
@@ -55,7 +67,7 @@ Set Set::operator + (const Set& rhSet) const {
 	Set result;
 	for (int i = 0; i <= UNIVERSE; ++i)
 	{
-		if(elements[i] || rhSet.getElement(i)) result += i;
+		if(elements[i] || rhSet.memberOf(i)) result += i;
 	}
 	return result;
 }
@@ -64,7 +76,7 @@ Set Set::operator - (const Set& rhSet) const {
 	Set result;
 	for (int i = 0; i <= UNIVERSE; ++i)
 	{
-		if(elements[i] && !rhSet.getElement(i)) result += i;
+		if(elements[i] && !rhSet.memberOf(i)) result += i;
 	}
 	return result;
 }
@@ -73,7 +85,7 @@ Set Set::intersect(const Set& rhSet) const {
 	Set result;
 	for (int i = 0; i <= UNIVERSE; ++i)
 	{
-		if(elements[i] && rhSet.getElement(i)) result += i;
+		if(elements[i] && rhSet.memberOf(i)) result += i;
 	}
 	return result;
 }
