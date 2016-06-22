@@ -82,7 +82,7 @@ void AdjacencyMatrix::print() {
 void AdjacencyMatrix::dft(int start) {
 
 
-	cout << "Depth first traveral from : ";
+	cout << endl << "Depth first traveral from : ";
 
 	printf("%c\n", start);
 	
@@ -109,7 +109,7 @@ void AdjacencyMatrix::dft(int start) {
 
 		current = frontier.pop();
 
-		printf("%c\n", current + 'a');
+		printf("%c\t", current + 'a');
 
 		for (int i = 0; i < 26; ++i) {
 			// if the current city is within reach to this city and 
@@ -123,11 +123,13 @@ void AdjacencyMatrix::dft(int start) {
 			}
 		}
 	}
+	
+	cout << endl;	
 }
 
 void AdjacencyMatrix::bft(int start) {
 
-	cout << "Breadth first traveral from : ";
+	cout << endl << "Breadth first traveral from : ";
 
 	printf("%c\n", start);
 
@@ -152,7 +154,7 @@ void AdjacencyMatrix::bft(int start) {
 
 		current = frontier.dequeue();
 
-		printf("%c\n", current + 'a');
+		printf("%c\t", current + 'a');
 
 		for (int i = 0; i < 26; ++i) {
 
@@ -165,5 +167,96 @@ void AdjacencyMatrix::bft(int start) {
 			}
 		}
 	}
+
+	cout << endl;
 }
 
+int AdjacencyMatrix::dfs(int source, int destination) {
+
+	// calculating index from letter
+	source = source - 'a';
+	// destination = destination - 'a';
+
+	int iterations = 0;
+
+	// create an empty frontier stack
+	Stack frontier;
+
+	int current = source;
+
+	// reinitialize the visited array
+	initVisited();
+
+	// mark the start vertex as visited
+	visited[source] = true;
+
+	// push the start vertex to stack
+	frontier.push(source);
+
+	while(!frontier.empty()) {
+
+		current = frontier.pop();
+
+		if(current == destination) break;
+
+		for (int i = 0; i < 26; ++i) {
+			// if the current city is within reach to this city and 
+			// this city has not been visited yet
+
+			if(vertices[current][i] < INT_MAX && !visited[i]) {
+
+				visited[i] = true;
+
+				frontier.push(i);
+			}
+		}
+
+		iterations++;
+	}	
+
+	return iterations;
+}
+
+int AdjacencyMatrix::bfs(int source, int destination) {
+
+	// calculating index from letter
+	source = source - 'a';
+
+	int iterations = 0;
+
+	// create an empty frontier queue
+	Queue frontier;
+
+	int current = source;
+
+	// reinitialize the visited array
+	initVisited();
+
+	// mark the start vertex as visited
+	visited[source] = true;
+
+	// push the start vertex to stack
+	frontier.enqueue(source);
+
+	while(!frontier.empty()) {
+
+		current = frontier.dequeue();
+
+		if(current == destination) break;
+
+		for (int i = 0; i < 26; ++i) {
+
+			// if the this city is within reach
+			if(vertices[current][i] < INT_MAX && !visited[i]) {
+
+				visited[i] = true;
+
+				frontier.enqueue(i);
+			}
+		}
+
+		iterations++;
+	}
+
+	return iterations;
+}

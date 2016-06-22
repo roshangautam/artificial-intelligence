@@ -33,5 +33,7 @@ public:
     void print();
     void dft(int);
     void bft(int);
+    int dfs(int, int);
+    int bfs(int, int);    
 };
 

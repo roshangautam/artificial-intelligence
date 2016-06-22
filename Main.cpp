@@ -8,6 +8,7 @@
 
 
 #include <iostream>
+#include <iomanip>
 #include "AdjacencyMatrix.h"
 
 using namespace std;
@@ -84,14 +85,18 @@ int main(int argc, char **argv) {
 	graph.addEdge('z', 'o', 71);
 
 
-	graph.print();
-	
-	char value;
-	cout << endl << "Enter a city for DFS and BFS ( a - z : lowercase):";
-	cin >> value;
+	// graph.print();
 
+	char value;
+	cout << endl << "Enter a source city for DFS and BFS ( a - z : lowercase):";
+	cin >> value;
 	graph.dft(value);
 	graph.bft(value);
+	cout << endl << setw(10) << "source\t" << setw(10) << "destination\t" << setw(10) << "DFS\t" << setw(10) << "BFS\t" << endl;
+	for (int i = 0; i < 26; ++i)
+	{
+		printf("%6c\t%14c\t%16d\t%8d\n", value , i + 'a', graph.dfs(value, i), graph.bfs(value, i));
+	}
 
 	return 0;
 } 
