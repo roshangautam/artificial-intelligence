@@ -1,4 +1,4 @@
 *.o
 *.dsym
-BST
+Graph
 .DS_Store
