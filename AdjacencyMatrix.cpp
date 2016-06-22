@@ -47,7 +47,8 @@ void AdjacencyMatrix::initVisited() {
 }
 
 void AdjacencyMatrix::addEdge(int from, int to, int data) {
-
+	from = from - 'a';
+	to = to - 'a';
 	// only if from and to index are within bounds
 	if(from < 26 && to < 26 && from >=0 && to >= 0) {
 
@@ -80,10 +81,18 @@ void AdjacencyMatrix::print() {
 
 void AdjacencyMatrix::dft(int start) {
 
-	cout << "Depth first traveral for " << start << endl;
 
-	// create an empty stack
-	Stack stack;
+	cout << "Depth first traveral from : ";
+
+	printf("%c\n", start);
+	
+
+	// calculating index from letter
+	start = start - 'a';
+
+
+	// create an empty frontier stack
+	Stack frontier;
 
 	int current = start;
 
@@ -94,23 +103,23 @@ void AdjacencyMatrix::dft(int start) {
 	visited[start] = true;
 
 	// push the start vertex to stack
-	stack.push(start);
+	frontier.push(start);
 
-	while(!stack.empty()) {
+	while(!frontier.empty()) {
 
-		current = stack.pop();
+		current = frontier.pop();
 
 		printf("%c\n", current + 'a');
 
-		for (int i = 0; i < 26; ++i)
-		{
-			// if the this city is within reach to this city and 
+		for (int i = 0; i < 26; ++i) {
+			// if the current city is within reach to this city and 
 			// this city has not been visited yet
 
 			if(vertices[current][i] < INT_MAX && !visited[i]) {
 
 				visited[i] = true;
-				stack.push(i);
+
+				frontier.push(i);
 			}
 		}
 	}
@@ -118,10 +127,15 @@ void AdjacencyMatrix::dft(int start) {
 
 void AdjacencyMatrix::bft(int start) {
 
-	cout << "Breadth first traveral for " << start << endl;
+	cout << "Breadth first traveral from : ";
 
-	// create an empty queue
-	Queue queue;
+	printf("%c\n", start);
+
+	// calculating index from letter
+	start = start - 'a';
+
+	// create an empty frontier queue
+	Queue frontier;
 
 	int current = start;
 
@@ -132,21 +146,22 @@ void AdjacencyMatrix::bft(int start) {
 	visited[start] = true;
 
 	// push the start vertex to stack
-	queue.enqueue(start);
+	frontier.enqueue(start);
 
-	while(!queue.empty()) {
+	while(!frontier.empty()) {
 
-		current = queue.dequeue();
+		current = frontier.dequeue();
 
 		printf("%c\n", current + 'a');
 
-		for (int i = 0; i < 26; ++i)
-		{
+		for (int i = 0; i < 26; ++i) {
+
 			// if the this city is within reach
 			if(vertices[current][i] < INT_MAX && !visited[i]) {
 
 				visited[i] = true;
-				queue.enqueue(i);
+
+				frontier.enqueue(i);
 			}
 		}
 	}

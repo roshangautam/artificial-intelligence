@@ -2,7 +2,7 @@
 //  main.cpp
 //  Graph
 //
-//  Created by Roshan Gautam on 06/20/16.
+//  Created by Roshan Gautam on 06/20/'p'.
 //  Copyright © 2016 Roshan Gautam. All rights reserved.
 //
 
@@ -17,33 +17,77 @@ int main(int argc, char **argv) {
 
 	AdjacencyMatrix graph;
 
-	graph.addEdge(0, 19, 140);
-	graph.addEdge(19, 0, 140);
-	graph.addEdge(0, 20, 118);
-	graph.addEdge(20, 0, 118);
-	graph.addEdge(0, 25, 75);
-	graph.addEdge(25, 0, 75);
+	graph.addEdge('a', 's', 140);
+	graph.addEdge('a', 't', 118);
+	graph.addEdge('a', 'z', 75);
 
-	graph.addEdge(1, 6, 211);
-	graph.addEdge(6, 1, 211);
-	graph.addEdge(1, 7, 90);
-	graph.addEdge(7, 1, 90);
-	graph.addEdge(1, 16, 101);	
-	graph.addEdge(16, 1, 101);	
-	graph.addEdge(1, 21, 85);
-	graph.addEdge(21, 1, 85);
+	graph.addEdge('b', 'f', 211);
+	graph.addEdge('b', 'g', 90);
+	graph.addEdge('b', 'p', 101);	
+	graph.addEdge('b', 'u', 85);
 
+	graph.addEdge('c', 'd', 120);
+	graph.addEdge('c', 'p', 138);	
+	graph.addEdge('c', 'r', 80);
 
-	graph.addEdge(19, 15, 151);
-	graph.addEdge(15, 19, 151);
-	graph.addEdge(19, 6, 99);	
-	graph.addEdge(6, 19, 99);	
-	graph.addEdge(19, 18, 80);
-	graph.addEdge(18, 19, 80);
+	graph.addEdge('d', 'c', 120);	
+	graph.addEdge('d', 'm', 75 );
+
+	graph.addEdge('e', 'h', 86);
+
+	graph.addEdge('f', 'b', 211);	
+	graph.addEdge('f', 's', 99);
+
+	graph.addEdge('g', 'b', 90);
+
+	graph.addEdge('h', 'e', 86);
+	graph.addEdge('h', 'u', 98);
+
+	graph.addEdge('i', 'n', 87);
+	graph.addEdge('i', 'v', 92);
+	
+	graph.addEdge('l', 'm', 70);
+	graph.addEdge('l', 't', 111);
+
+	graph.addEdge('m', 'd', 75);	
+	graph.addEdge('m', 'l', 70);
+
+	graph.addEdge('n', 'i', 87);
+
+	graph.addEdge('o', 's', 151);
+	graph.addEdge('o', 'z', 71);
+
+	graph.addEdge('p', 'b', 101);	
+	graph.addEdge('p', 'c', 138);
+	graph.addEdge('p', 'r', 97);	
+
+	graph.addEdge('r', 'c', 80);
+	graph.addEdge('r', 'p', 97);
+	graph.addEdge('r', 's', 80);
+
+	graph.addEdge('s', 'a', 140);
+	graph.addEdge('s', 'f', 99);		
+	graph.addEdge('s', 'o', 151);	
+	graph.addEdge('s', 'r', 80);		
+	
+	graph.addEdge('t', 'a', 118);
+	graph.addEdge('t', 'l', 111);	
+
+	graph.addEdge('u', 'b', 85);
+	graph.addEdge('u', 'h', 98);	
+	graph.addEdge('u', 'v', 142);
+
+	graph.addEdge('v', 'i', 92);
+	graph.addEdge('v', 'u', 142);
+
+	graph.addEdge('z', 'a', 75);
+	graph.addEdge('z', 'o', 71);
+
 
 	graph.print();
-	int value;
-	cout << endl << "Enter a city for DFS and BFS ( 0 - 25)";
+	
+	char value;
+	cout << endl << "Enter a city for DFS and BFS ( a - z : lowercase):";
 	cin >> value;
 
 	graph.dft(value);
