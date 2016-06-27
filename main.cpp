@@ -3,6 +3,6 @@
 using namespace std;
 
 int main() {
-	cout << "Table Driven Agents";
+	cout << "Table Driven Agents" << endl;
 	return 0;
 }
