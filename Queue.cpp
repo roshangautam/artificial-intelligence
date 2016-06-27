@@ -12,6 +12,11 @@ Queue::Queue() {
     // cout << "Queue Initialized" << endl;
 }
 
+void Queue::enqueueFront(int data) {
+	// add at the head of the list
+    addAtHead(data);
+}
+
 void Queue::enqueue(int data) {
 	// add at the tail of the list
     addAtTail(data);

@@ -16,6 +16,7 @@
 class Queue : public UnorderedLinkedList {
 public:
     Queue();
+    void enqueueFront(int);
     void enqueue(int);
     int dequeue();
 };

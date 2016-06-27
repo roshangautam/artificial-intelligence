@@ -260,3 +260,53 @@ int AdjacencyMatrix::bfs(int source, int destination) {
 
 	return iterations;
 }
+
+int AdjacencyMatrix::uniform(int source, int destination) {
+
+	// calculating index from letter
+	source = source - 'a';
+
+	int iterations = 0;
+
+	// create an empty frontier queue
+	Queue frontier;
+
+	int current = source;
+	int cost[26];
+	// reinitialize the visited array
+	initVisited();
+
+	// mark the start vertex as visited
+	visited[source] = true;
+
+	// push the start vertex to stack
+	frontier.enqueue(source);
+
+	while(!frontier.empty()) {
+
+		current = frontier.dequeue();
+
+		if(current == destination) break;
+
+		for (int i = 0; i < 26; ++i) {
+
+			// if the this city is within reach
+			if(vertices[current][i] < INT_MAX) {
+
+				if(!visited[i]) {
+					visited[i] = true;
+					frontier.enqueue(i);
+					cost[i] = vertices[current][i];
+				} else {
+					if(vertices[current][i] < cost[i]) {
+						cost[i] = vertices[current][i];
+					}
+				}
+			}
+		}
+
+		iterations++;
+	}
+
+	return iterations;
+}
