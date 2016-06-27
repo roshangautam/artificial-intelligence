@@ -10,8 +10,7 @@ all: main
 main: $(OBJS)
 	$(CXX) $(LDFLAGS) -o Agent $(OBJS) $(LDLIBS) 
 
-main.o: main.cpp
-
+main.o: main.cpp 
 
 clean:
 	$(RM) $(OBJS)
