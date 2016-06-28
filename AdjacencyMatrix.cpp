@@ -272,7 +272,7 @@ int AdjacencyMatrix::uniform(int source, int destination) {
 	Queue frontier;
 
 	int current = source;
-	int cost[26];
+	int pathCost = 0;
 	// reinitialize the visited array
 	initVisited();
 
@@ -288,7 +288,10 @@ int AdjacencyMatrix::uniform(int source, int destination) {
 
 		if(current == destination) break;
 
+		// get all children in sorted order such that lowest cost is on top
+		
 		for (int i = 0; i < 26; ++i) {
+			
 
 			// if the this city is within reach
 			if(vertices[current][i] < INT_MAX) {
