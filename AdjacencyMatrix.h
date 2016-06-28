@@ -37,6 +37,6 @@ public:
     int BFS(int, int);
     int UCS(int, int);
     int countChildren(int); 
-    int* children(int);   
+    int* getChildren(int);   
 };
 

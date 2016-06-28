@@ -72,7 +72,7 @@ int AdjacencyMatrix::countChildren(int node) {
 	return count;
 }
 
-int* AdjacencyMatrix::children(int node)
+int* AdjacencyMatrix::getChildren(int node)
 {
 	int count = 0, counter = 0;
 
@@ -81,7 +81,7 @@ int* AdjacencyMatrix::children(int node)
 	// create an array to hold all the childrens
 	int* children = new int[count];
 
-	for (int i = 0; i < 26; ++i) {
+	for (int i = 0; i < 26; i++) {
 		// if theres a path add this node to the children list
 		if(vertices[node][i] < INT_MAX) {
 			children[counter] = i;	
@@ -90,8 +90,34 @@ int* AdjacencyMatrix::children(int node)
 
 	}
 
-	// sort the children array
-	sort(children, count)
+
+	//bubble sort
+	int temp;
+
+	for(int i = 0; i < count; i++)
+	{
+		cout << vertices[node][children[i]] << endl << endl;
+
+		for(int j = 1; j < count - 1; j++)
+		{
+			cout << vertices[node][children[j]] << endl;
+			if(vertices[node][children[j]] < vertices[node][children[i]])
+			{
+				//swap them
+				temp = children[i];
+				children[i] = children[j];
+				children[j] = temp;
+			}
+		}
+
+		for (int k = 0; k < count; k++)
+		{
+			cout << endl << vertices[node][children[k]] << endl;
+		}
+
+		cout << endl;
+	}
+	cout << endl;
 		
 	return children;
 }
@@ -303,9 +329,7 @@ int AdjacencyMatrix::UCS(int source, int destination) {
 	// calculating index from letter
 	source = source - 'a';
 
-	int iterations = 0;
-
-	// create an empty frontier queue
+	// create an empty frontier queue, we will use it a priority queue by adding things at head
 	Queue frontier;
 
 	int current = source;
@@ -325,20 +349,19 @@ int AdjacencyMatrix::UCS(int source, int destination) {
 
 		current = frontier.dequeue();
 
-		if(current == destination) break;
+		// if(current == destination) break;
 
 		// get all children in sorted order such that lowest cost is on top
-		int count = geChildrenCount(current);
+		int count = countChildren(current);
 
-		int* children = children(current);
+		int* children = getChildren(current);
 
 		for (int i = 0; i < count; ++i)
 		{
-			cout << children[i] << endl;
+			cout << vertices[current][children[i]] << endl;
 		}
 		
-		iterations++;
 	}
 
-	return iterations;
+	return 0;
 }
