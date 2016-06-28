@@ -20,12 +20,18 @@
 class UnorderedLinkedList {
     ULLNode* _head; // structural content, points to the head of the list
     ULLNode* _tail; // structural content, points to the tail of the list
+    bool addAtHead(ULLNode*);
+    bool addAtHeadWithPriority(ULLNode*);
+    bool addAtTail(ULLNode*);
+
 public:
     UnorderedLinkedList();
     ULLNode* getHead();
     ULLNode* getTail();
     bool addAtHead(int value);
+    bool addAtHead(int value, int cost);
     bool addAtTail(int value);
+    bool addAtTail(int value, int cost);
     bool removeFromHead(int& node);
     bool removeFromTail(int& node);
     bool empty();

@@ -25,13 +25,22 @@ ULLNode* UnorderedLinkedList::getTail() {
 }
 
 bool UnorderedLinkedList::addAtHead(int value) {
+    //Create a new ULLNode
+    ULLNode *newHead = new ULLNode(value);
+    return addAtHead(newHead);    
+}
+
+bool UnorderedLinkedList::addAtHead(int value, int cost) {
+    //Create a new ULLNode
+    ULLNode *newHead = new ULLNode(value, cost);
+    return addAtHeadWithPriority(newHead);    
+}
+
+bool UnorderedLinkedList::addAtHead(ULLNode* newHead) {
     // Add informational content, int to the head of this list
 
     // Assume everything will work out fine
     bool success = true;
-    
-    //Create a new ULLNode
-    ULLNode *newHead = new ULLNode(value);
     
     // If a new ULLNode was created
     if(newHead) {
@@ -55,14 +64,51 @@ bool UnorderedLinkedList::addAtHead(int value) {
     return success;
 }
 
-bool UnorderedLinkedList::addAtTail(int node) {
+bool UnorderedLinkedList::addAtHeadWithPriority(ULLNode* newNode) {
+    // Add informational content, int to the head of this list
+
+    // Assume everything will work out fine
+    bool success = true;
+    ULLNode* temp;
+    // If a new ULLNode was created
+    if(newNode) {
+        if(_head == NULL || newNode->getCost() < _head->getCost()) {
+            newNode->setNext(_head);
+            // _head->setPrevious(newNode);
+            _head = newNode;
+        } else {
+            temp = _head;
+            while(temp->getNext() && temp->getNext()->getCost() <= newNode->getCost()) temp = temp->getNext();
+            newNode->setNext(temp->getNext());
+            temp->setNext(newNode);
+        }
+        
+    } else {
+        // Failed to create a new ULLNode
+        success = false;
+        
+    }
+    
+    return success;
+}
+
+bool UnorderedLinkedList::addAtTail(int value) {
+    //Create a new ULLNode
+    ULLNode *newTail = new ULLNode(value);
+    return addAtHead(newTail);    
+}
+
+bool UnorderedLinkedList::addAtTail(int value, int cost) {
+    //Create a new ULLNode
+    ULLNode *newTail = new ULLNode(value, cost);
+    return addAtHead(newTail);    
+}
+
+bool UnorderedLinkedList::addAtTail(ULLNode* newNode) {
     // Add informational content, int to the tail of this list
 
     // Assume everything will work out fine
     bool success = true;
-    
-    //Create a new ULLNode
-    ULLNode *newNode = new ULLNode(node);
     
     // If a new ULLNode was created
     if(newNode) {

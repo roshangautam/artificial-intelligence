@@ -42,9 +42,10 @@ void AdjacencyMatrix::initVisited() {
 
 	// loop through the visited array and set everything to false
 	for (int i = 0; i < 26; ++i) {
-
 		visited[i] = false;
 	}	
+
+	explored.clear();
 }
 
 void AdjacencyMatrix::addEdge(int from, int to, int data) {
@@ -88,37 +89,8 @@ int* AdjacencyMatrix::getChildren(int node)
 			counter++;
 		} 
 
-	}
+	}	
 
-
-	//bubble sort
-	int temp;
-
-	for(int i = 0; i < count; i++)
-	{
-		cout << vertices[node][children[i]] << endl << endl;
-
-		for(int j = 1; j < count - 1; j++)
-		{
-			cout << vertices[node][children[j]] << endl;
-			if(vertices[node][children[j]] < vertices[node][children[i]])
-			{
-				//swap them
-				temp = children[i];
-				children[i] = children[j];
-				children[j] = temp;
-			}
-		}
-
-		for (int k = 0; k < count; k++)
-		{
-			cout << endl << vertices[node][children[k]] << endl;
-		}
-
-		cout << endl;
-	}
-	cout << endl;
-		
 	return children;
 }
 
@@ -332,6 +304,7 @@ int AdjacencyMatrix::UCS(int source, int destination) {
 	// create an empty frontier queue, we will use it a priority queue by adding things at head
 	Queue frontier;
 
+
 	int current = source;
 
 	int pathCost = 0;
@@ -339,29 +312,38 @@ int AdjacencyMatrix::UCS(int source, int destination) {
 	// reinitialize the visited array
 	initVisited();
 
-	// mark the start vertex as visited
-	visited[source] = true;
-
+	cout << endl << "UCS Begins" << endl;
 	// push the start vertex to stack
-	frontier.enqueue(source);
-
+	frontier.enqueue(source, pathCost);
+	cout << endl << "Queue" << endl;
+	frontier.print();
+	cout << endl;
+	int counter = 0;
 	while(!frontier.empty()) {
+
+		pathCost = frontier.getHead()->getCost();
 
 		current = frontier.dequeue();
 
-		// if(current == destination) break;
+		if(current == destination) break;
 
 		// get all children in sorted order such that lowest cost is on top
 		int count = countChildren(current);
 
 		int* children = getChildren(current);
 
-		for (int i = 0; i < count; ++i)
-		{
-			cout << vertices[current][children[i]] << endl;
+		for (int i = 0; i < count; ++i) {
+
+			if(!explored[children[i]][pathCost + vertices[current][children[i]]]) {
+				frontier.priority(children[i], pathCost + vertices[current][children[i]]);
+				explored[children[i]][pathCost + vertices[current][children[i]]] = true;
+			}
+
 		}
-		
+		cout << "Queue" << endl;
+		frontier.print();
+		cout << endl;
 	}
 
-	return 0;
+	return pathCost;
 }

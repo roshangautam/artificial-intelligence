@@ -12,12 +12,12 @@
 #define AdjacencyMatrix_h
 
 #include <iostream>
-
+#include <map>
 
 #endif /* AdjacencyMatrix_h */
 
 using namespace std;
-
+typedef map<int, map<int, bool> > table;
 class AdjacencyMatrix {
 
     // 26 by 26 matrix for each letters in english alphabets
@@ -25,6 +25,9 @@ class AdjacencyMatrix {
 
     // an array to keep track of visited vertices while traversing
     bool visited[26];
+
+    // a map to keep track of explored vertices while traversing
+    table explored;
 
 public:
     AdjacencyMatrix();  

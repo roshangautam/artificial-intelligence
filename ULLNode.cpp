@@ -19,6 +19,14 @@ ULLNode::ULLNode(int value) {
     // Constructor to create a ULLNode with given int as informational content
     _value = value;
     _next = NULL;
+    _cost = 0;
+}
+
+ULLNode::ULLNode(int value, int cost) {
+    // Constructor to create a ULLNode with given int as informational content
+    _value = value;
+    _next = NULL;
+    _cost = cost;
 }
 
 int ULLNode::getValue() {
@@ -26,9 +34,20 @@ int ULLNode::getValue() {
     return _value;
 }
 
+int ULLNode::getCost() {
+    // returns informational content of this node
+    return _cost;
+}
+
 void ULLNode::setValue(int value) {
     // set informational content of this node
     _value = value;
+}
+
+void ULLNode::setValue(int value, int cost) {
+    // set informational content of this node
+    _value = value;
+    _cost = cost;
 }
 
 ULLNode* ULLNode::getNext() {
