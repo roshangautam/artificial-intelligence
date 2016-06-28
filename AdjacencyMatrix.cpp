@@ -13,9 +13,39 @@
 #include <iostream>
 #include <climits>
 #include <algorithm>
+#include <list>
 #include "AdjacencyMatrix.h"
 #include "Stack.h"
 #include "Queue.h"
+int hsld[26] = 	{
+	366,
+	0,
+	160,
+	242,
+	161,
+	176,
+	77,
+	151,
+	226,
+	INT_MAX,
+	INT_MAX,
+	244,
+	241,
+	234,
+	380,
+	100,
+	INT_MAX,
+	193,
+	253,
+	329,
+	80,
+	199,
+	INT_MAX,
+	INT_MAX,
+	INT_MAX,
+	374
+};
+
 #endif /* AdjacencyMatrix_cpp */
 
 using namespace std;
@@ -346,4 +376,59 @@ int AdjacencyMatrix::UCS(int source, int destination) {
 	}
 
 	return pathCost;
+}
+
+void AdjacencyMatrix::GBFS(int source, int destination) {
+
+	// calculating index from letter
+	source = source - 'a';
+
+	// create an empty frontier queue, we will use it a priority queue by adding things at head
+	Queue frontier;
+	list<int> path;
+
+
+	int current = source;
+
+	int pathCost = 0;
+
+	// reinitialize the visited array
+	initVisited();
+
+	cout << endl << "GBFS Begins" << endl;
+	// push the start vertex to stack
+	frontier.priority(source, hsld[source]);
+	cout << endl << "Queue" << endl;
+	frontier.print();
+	cout << endl;
+	int counter = 0;
+	while(!frontier.empty()) {
+		pathCost = hsld[frontier.getHead()->getValue()];
+		current = frontier.dequeue();
+		path.push_back(current);
+		if(current == destination) break;
+
+		// get all children in sorted order such that lowest cost is on top
+		int count = countChildren(current);
+
+		int* children = getChildren(current);
+
+		for (int i = 0; i < count; ++i) {
+
+			if(!explored[children[i]][hsld[children[i]]]) {
+				frontier.priority(children[i], hsld[children[i]]);
+				explored[children[i]][hsld[children[i]]] = true;
+			}
+
+		}
+		cout << "Queue" << endl;
+		frontier.print();
+		cout << endl;
+		counter++;
+	}
+
+	for (list<int>::iterator it = path.begin(); it != path.end(); ++it)
+	{
+		printf("%c\n", *it + 'A');
+	}
 }

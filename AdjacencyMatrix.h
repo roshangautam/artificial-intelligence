@@ -14,10 +14,16 @@
 #include <iostream>
 #include <map>
 
+using namespace std;
+
+typedef map<int, map<int, bool> > table;
+
 #endif /* AdjacencyMatrix_h */
 
-using namespace std;
-typedef map<int, map<int, bool> > table;
+
+
+
+
 class AdjacencyMatrix {
 
     // 26 by 26 matrix for each letters in english alphabets
@@ -39,6 +45,7 @@ public:
     int DFS(int, int);
     int BFS(int, int);
     int UCS(int, int);
+    void GBFS(int, int);
     int countChildren(int); 
     int* getChildren(int);   
 };
