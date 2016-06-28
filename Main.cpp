@@ -30,7 +30,7 @@ int main(int argc, char **argv) {
 
 	graph.addEdge('c', 'd', 120);
 	graph.addEdge('c', 'p', 138);	
-	graph.addEdge('c', 'r', 80);
+	graph.addEdge('c', 'r', 146);
 
 	graph.addEdge('d', 'c', 120);	
 	graph.addEdge('d', 'm', 75 );
@@ -63,7 +63,7 @@ int main(int argc, char **argv) {
 	graph.addEdge('p', 'c', 138);
 	graph.addEdge('p', 'r', 97);	
 
-	graph.addEdge('r', 'c', 80);
+	graph.addEdge('r', 'c', 146);
 	graph.addEdge('r', 'p', 97);
 	graph.addEdge('r', 's', 80);
 
@@ -86,8 +86,8 @@ int main(int argc, char **argv) {
 	graph.addEdge('z', 'o', 71);
 
 	// we are assuming 0 is a therefore 1 is b i.e. Bucharest
-	cout << "GBFS From Arad to Bucharest " << endl;
-	graph.GBFS('a', 1);
+	cout << "A* From Arad to Bucharest " << endl;
+	graph.aStar('a', 1);
 	
 	return 0;
 } 

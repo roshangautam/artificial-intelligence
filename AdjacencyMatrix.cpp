@@ -14,6 +14,7 @@
 #include <climits>
 #include <algorithm>
 #include <list>
+#include <vector>
 #include "AdjacencyMatrix.h"
 #include "Stack.h"
 #include "Queue.h"
@@ -334,7 +335,6 @@ int AdjacencyMatrix::UCS(int source, int destination) {
 	// create an empty frontier queue, we will use it a priority queue by adding things at head
 	Queue frontier;
 
-
 	int current = source;
 
 	int pathCost = 0;
@@ -431,4 +431,67 @@ void AdjacencyMatrix::GBFS(int source, int destination) {
 	{
 		printf("%c\n", *it + 'A');
 	}
+}
+
+void AdjacencyMatrix::aStar(int source, int destination) {
+
+	// calculating index from letter
+	source = source - 'a';
+
+	// create an empty frontier queue, we will use it a priority queue by adding things at head
+	Queue frontier;
+	vector<int> path;
+
+	int current = source;
+
+	int pathCost = 0;
+
+	// reinitialize the visited array
+	initVisited();
+
+	cout << endl << "GBFS Begins" << endl;
+	// push the start vertex to stack
+	frontier.priority(source, pathCost + hsld[source]);
+	cout << endl << "Queue" << endl;
+	frontier.print();
+	cout << endl;
+	int counter = 0;
+	while(!frontier.empty()) {
+		pathCost = frontier.getHead()->getCost();
+		current = frontier.dequeue();
+		path.push_back(current);
+		if(current == destination) break;
+		// get all children in sorted order such that lowest cost is on top
+		int count = countChildren(current);
+		int* children = getChildren(current);
+		for (int i = 0; i < count; ++i) {
+			int cost = hsld[children[i]];
+
+			if(path.size() > 1) {
+				int iterator = 0;
+				for (int j = 0; j < path.size() - 1 ; j++) {
+					if (children[i] == path.at(j)) break;
+					if(vertices[path.at(j)][path.at(j+1)] < INT_MAX)
+						cost += vertices[path.at(j)][path.at(j+1)];
+				}
+				cost += vertices[children[i]][path.at(path.size()-1)];
+			}
+			else 
+				cost += vertices[path.at(0)][children[i]];
+
+			if(!explored[children[i]][cost]) {
+				frontier.priority(children[i], cost);
+				explored[children[i]][cost] = true;
+			}
+
+		}
+		cout << "Queue" << endl;
+		frontier.print();
+		cout << endl;
+		counter++;
+	}
+	cout << endl << "AStar Path:" << endl;
+
+	for (int i = 0; i < path.size(); i++)
+		printf("%c\n", path.at(i) + 'A');
 }

@@ -46,6 +46,7 @@ public:
     int BFS(int, int);
     int UCS(int, int);
     void GBFS(int, int);
+    void aStar(int, int);
     int countChildren(int); 
     int* getChildren(int);   
 };
