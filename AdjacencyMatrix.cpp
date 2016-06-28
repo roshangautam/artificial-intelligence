@@ -12,6 +12,7 @@
 
 #include <iostream>
 #include <climits>
+#include <algorithm>
 #include "AdjacencyMatrix.h"
 #include "Stack.h"
 #include "Queue.h"
@@ -61,6 +62,41 @@ void AdjacencyMatrix::addEdge(int from, int to, int data) {
 
 }
 
+int AdjacencyMatrix::countChildren(int node) {
+	int count = 0;
+
+	// count number of childrens
+	for (int i = 0; i < 26; ++i)
+		if(vertices[node][i] < INT_MAX) count ++;
+
+	return count;
+}
+
+int* AdjacencyMatrix::children(int node)
+{
+	int count = 0, counter = 0;
+
+	count = countChildren(node);
+
+	// create an array to hold all the childrens
+	int* children = new int[count];
+
+	for (int i = 0; i < 26; ++i) {
+		// if theres a path add this node to the children list
+		if(vertices[node][i] < INT_MAX) {
+			children[counter] = i;	
+			counter++;
+		} 
+
+	}
+
+	// sort the children array
+	sort(children, count)
+		
+	return children;
+}
+
+
 void AdjacencyMatrix::print() {
 
 	// loop through the matrix and print
@@ -79,7 +115,7 @@ void AdjacencyMatrix::print() {
 	}	
 }
 
-void AdjacencyMatrix::dft(int start) {
+void AdjacencyMatrix::DFT(int start) {
 
 
 	cout << endl << "Depth first traveral from : ";
@@ -127,7 +163,7 @@ void AdjacencyMatrix::dft(int start) {
 	cout << endl;	
 }
 
-void AdjacencyMatrix::bft(int start) {
+void AdjacencyMatrix::BFT(int start) {
 
 	cout << endl << "Breadth first traveral from : ";
 
@@ -171,7 +207,7 @@ void AdjacencyMatrix::bft(int start) {
 	cout << endl;
 }
 
-int AdjacencyMatrix::dfs(int source, int destination) {
+int AdjacencyMatrix::DFS(int source, int destination) {
 
 	// calculating index from letter
 	source = source - 'a';
@@ -217,7 +253,7 @@ int AdjacencyMatrix::dfs(int source, int destination) {
 	return iterations;
 }
 
-int AdjacencyMatrix::bfs(int source, int destination) {
+int AdjacencyMatrix::BFS(int source, int destination) {
 
 	// calculating index from letter
 	source = source - 'a';
@@ -261,7 +297,8 @@ int AdjacencyMatrix::bfs(int source, int destination) {
 	return iterations;
 }
 
-int AdjacencyMatrix::uniform(int source, int destination) {
+
+int AdjacencyMatrix::UCS(int source, int destination) {
 
 	// calculating index from letter
 	source = source - 'a';
@@ -272,7 +309,9 @@ int AdjacencyMatrix::uniform(int source, int destination) {
 	Queue frontier;
 
 	int current = source;
+
 	int pathCost = 0;
+
 	// reinitialize the visited array
 	initVisited();
 
@@ -289,25 +328,15 @@ int AdjacencyMatrix::uniform(int source, int destination) {
 		if(current == destination) break;
 
 		// get all children in sorted order such that lowest cost is on top
-		
-		for (int i = 0; i < 26; ++i) {
-			
+		int count = geChildrenCount(current);
 
-			// if the this city is within reach
-			if(vertices[current][i] < INT_MAX) {
+		int* children = children(current);
 
-				if(!visited[i]) {
-					visited[i] = true;
-					frontier.enqueue(i);
-					cost[i] = vertices[current][i];
-				} else {
-					if(vertices[current][i] < cost[i]) {
-						cost[i] = vertices[current][i];
-					}
-				}
-			}
+		for (int i = 0; i < count; ++i)
+		{
+			cout << children[i] << endl;
 		}
-
+		
 		iterations++;
 	}
 

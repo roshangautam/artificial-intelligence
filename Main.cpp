@@ -90,13 +90,14 @@ int main(int argc, char **argv) {
 	char value;
 	cout << endl << "Enter a source city for DFS and BFS ( a - z : lowercase):";
 	cin >> value;
-	graph.dft(value);
-	graph.bft(value);
-	cout << endl << setw(10) << "source\t" << setw(10) << "destination\t" << setw(10) << "DFS\t" << setw(10) << "BFS\t" << endl;
-	for (int i = 0; i < 26; ++i)
-	{
-		printf("%6c\t%14c\t%16d\t%8d\n", value , i + 'a', graph.dfs(value, i), graph.bfs(value, i));
-	}
+	graph.DFT(value);
+	graph.BFT(value);
+	cout << endl << setw(10) << "source\t" << setw(10) << "destination\t" << setw(10) << "DFS\t" << setw(10) << "BFS\t" << setw(10) << "UCS\t" << endl;
 
+	for (int i = 0; i < 26; ++i) {
+
+		printf("%6c\t%14c\t%16d\t%8d\t%8d\n", value , i + 'a', graph.DFS(value, i), graph.BFS(value, i), graph.UCS(value, i));
+	}
+	
 	return 0;
 } 

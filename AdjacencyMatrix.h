@@ -31,10 +31,12 @@ public:
     void addEdge(int, int, int);
     void initVisited();
     void print();
-    void dft(int);
-    void bft(int);
-    int dfs(int, int);
-    int bfs(int, int);
-    int uniform(int, int);    
+    void DFT(int);
+    void BFT(int);
+    int DFS(int, int);
+    int BFS(int, int);
+    int UCS(int, int);
+    int countChildren(int); 
+    int* children(int);   
 };
 

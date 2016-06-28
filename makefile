@@ -1,9 +1,6 @@
 CC=gcc
 CXX=g++
 RM=rm -f
-CPPFLAGS=-g $(shell root-config --cflags)
-LDFLAGS=-g $(shell root-config --ldflags)
-LDLIBS=$(shell root-config --libs)
 
 SRCS=Main.cpp AdjacencyMatrix.cpp Queue.cpp Stack.cpp UnorderedLinkedList.cpp ULLNode.cpp
 OBJS=$(subst .cc,.o,$(SRCS))
