@@ -85,21 +85,9 @@ int main(int argc, char **argv) {
 	graph.addEdge('z', 'a', 75);
 	graph.addEdge('z', 'o', 71);
 
-
-	// graph.print();
 	// we are assuming 0 is a therefore 1 is b i.e. Bucharest
 	cout << "GBFS From Arad to Bucharest " << endl;
 	graph.GBFS('a', 1);
-	
-
-	// graph.DFT(value);
-	// graph.BFT(value);
-	// cout << endl << setw(10) << "source\t" << setw(10) << "destination\t" << setw(10) << "DFS\t" << setw(10) << "BFS\t" << setw(10) << "UCS\t" << endl;
-
-	// for (int i = 0; i < 26; ++i) {
-
-	// 	printf("%6c\t%14c\t%16d\t%8d\t%8d\n", value , i + 'a', graph.DFS(value, i), graph.BFS(value, i), graph.UCS(value, i));
-	// }
 	
 	return 0;
 } 

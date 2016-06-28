@@ -426,7 +426,7 @@ void AdjacencyMatrix::GBFS(int source, int destination) {
 		cout << endl;
 		counter++;
 	}
-
+	cout << endl << "Greedy Path:" << endl;
 	for (list<int>::iterator it = path.begin(); it != path.end(); ++it)
 	{
 		printf("%c\n", *it + 'A');
