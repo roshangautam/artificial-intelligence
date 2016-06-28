@@ -65,13 +65,13 @@ STATUS Percept::getStatus() const {
 }
 
 void Percept::printLocation()  {
-	if(_location == A) cout << "ROOM A" << endl;
-	else if(_location == B) cout << "ROOM B" << endl;
+	if(_location == A) cout <<  "Location: ROOM A" << endl;
+	else if(_location == B) cout << "Location: ROOM B" << endl;
 }
 
 void Percept::printStatus()  {
-	if(_status == CLEAN) cout << "CLEAN" << endl;
-	else if(_status == DIRTY) cout << "DIRTY" << endl;
+	if(_status == CLEAN) cout << "Status: CLEAN" << endl;
+	else if(_status == DIRTY) cout << "Status: DIRTY" << endl;
 }
 
 bool Percept::operator==(const Percept& percept) {
@@ -135,7 +135,7 @@ public:
 };
 
 AgentTable::AgentTable() {
-	cout << "Agent Table Initialized" << endl;
+	cout << endl << "Agent Table Initialized" << endl;
 	Sequence sequence;
 
 	// 4 states
@@ -344,12 +344,12 @@ public:
 };
 
 Agent::Agent() {
-	cout << "Vacuum Robot Agent Initialized"<<endl;
+	cout << endl << "Vacuum Robot Agent Initialized" << endl;
 }
 
 ACTION Agent::execute(Percept percept) {
 	_sequence.addPercept(percept);
-	cout << "Current Percept Sequence" << endl;
+	cout << endl << "Current Percept Sequence" << endl;
 	for (int i = 0; i < _sequence.getSequenceLength(); ++i)
 	{
 		_sequence.getPerceptAt(i).printLocation();
@@ -359,10 +359,10 @@ ACTION Agent::execute(Percept percept) {
 }
 
 void printAction(ACTION action) {
-	if(action == 0) cout << "No Operation" << endl;
-	else if(action == 1) cout << "Move Right" << endl;
-	else if(action == 2) cout << "Move Left" << endl;
-	else if(action == 3) cout << "Suck" << endl;
+	if(action == 0) cout << "Action : NOOP" << endl;
+	else if(action == 1) cout << "Action : MOVE RIGHT" << endl;
+	else if(action == 2) cout << "Action : MOVE LEFT" << endl;
+	else if(action == 3) cout << "Action : SUCK DIRT" << endl;
 }
 
 int main() {
@@ -373,5 +373,11 @@ int main() {
 	percept.setLocationAndStatus(A, CLEAN);
 	action = vacuumRobot.execute(percept);
 	printAction(action);
+	percept.setLocationAndStatus(B, DIRTY);
+	action = vacuumRobot.execute(percept);
+	printAction(action);	
+	percept.setLocationAndStatus(B, CLEAN);
+	action = vacuumRobot.execute(percept);
+	printAction(action);		
 	return 0;
 }
