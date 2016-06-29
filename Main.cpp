@@ -78,12 +78,11 @@ int main(int argc, char **argv) {
     {
         if(i == 0) {
           currentState = MAX;
-          levelStates[i] = currentState;   
         } else {
             if (currentState == MAX) currentState = MIN;
             else currentState = MAX;
-            levelStates[i] = currentState;
         }
+        levelStates[i] = currentState;   
     }
 
     int nodesLeft = n;
@@ -93,6 +92,7 @@ int main(int argc, char **argv) {
         int nodesInThisLevel = pow(2, i);
         int levelStart = nodesLeft - nodesInThisLevel;
         int levelEnd = levelStart + nodesInThisLevel;
+        cout << levelStart << ":" << levelEnd << endl;
         for (int j = levelStart; j < levelEnd; j+=2)
         {
             int parent = (j - 1 ) / 2 ;
