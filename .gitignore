@@ -1,4 +1,4 @@
 *.o
 *.dsym
-BST
+MINIMAX
 .DS_Store
