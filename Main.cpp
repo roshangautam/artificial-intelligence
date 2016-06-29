@@ -8,270 +8,38 @@
 
 
 #include <iostream>
-#include <fstream>
+
 #include <cstdlib>
 #include <iomanip>
 
-#include "BinarySearchTree.h"
-
 using namespace std;
 
-//Forward declarations for some common handy functions
-void insert();
-void search();
-void load();
-void generate();
-void breadthFirstSearch();
-void depthFirstSearch();
-
-//Binary Tree Global object
-BinarySearchTree *tree;
 
 int main(int argc, char **argv) {
     
-    char c; //menu input
-    
-    std::cout << "Binary Search Tree!\n";
-    
-    tree = new BinarySearchTree(); // create a new instance of BST
-    
-    load(); //load data from a file and build a binary tree
-    
-    // Menu Options
-    while(true) {
-        
-        cout << "Select an option (1-9) OR press Q to quit" << endl;
-        
-        cout << "1. Insert Node" << endl;
-        
-        cout << "2. Search Node" << endl;
-        
-        cout << "3. Depth Fist Traversal - Preorder" << endl;
-        cout << "4. Depth Fist Traversal - Inorder" << endl;
-        cout << "5. Depth Fist Traversal - Postorder" << endl;
-        
-        cout << "6. Breadth Fist Traversal" << endl;
-
-        cout << "7. Generate a tree with random numbers and display retrieval counts" << endl;
-        cout << "8. Search a node using BFS" << endl;
-        cout << "9. Search a node using DFS" << endl;
-
-        cin >> c;
-        
-        switch (c) {
-                
-            case '1':
-                
-                insert();
-                
-                break;
-                
-            case '2':
-                
-                search();
-                
-                break;
-                
-            case '3':
-                
-                cout << "Depth First Traversal - Preorder" << endl;
-                
-                tree->dftIterativePreorder();
-                
-                break;
-                
-            case '4':
-                
-                cout << "Depth First Traversal - Inorder" << endl;
-                
-                tree->dftIterativeInorder();
-                
-                break;
-                
-            case '5':
-                
-                cout << "Depth First Traversal - Postorder" << endl;
-                
-                tree->dftIterativePostorder();
-                
-                break;
-                
-            case '6':
-                
-                cout << "Breadth First Traversal" << endl;
-                
-                tree->bft();
-                
-                break;
-
-            case '7':
-                
-                cout << "Generating Tree with random Numbers:" << endl;
-                
-                generate();
-                
-                break; 
-
-            case '8':
-                
-                breadthFirstSearch();
-                
-                break;  
-
-            case '9':
-                
-                depthFirstSearch();
-                
-                break;                                                
-                
-            case 'Q':
-            case 'q':
-                
-                cout << "Thats all folks" << endl;
-                
-                exit(0);
-                
-                break;
-                
-            default:
-                
-                break;
-        }
-    }
-    
-    return 0;
-}
-
-// Reads user input and inserts that onto global tree instance
-void insert() {
-    
-    int data;
-    
-    cout << "Enter a value to insert:";
-    
-    cin >> data;
-    
-    if(tree->insert(data))
-        cout << data << "Inserted successfully" << endl;
-    else
-        cout << "Insertion Failed" << endl;
-    
-}
-
-// Reads user input and tries to find it in the tree
-void search() {
-    
-    int data;
-    
-    cout << "Enter a value to search:";
-    
-    cin >> data;
-    
-    BSTNode *result = tree->search(data);
-    
-    if(result)
-        
-        cout << "Result: " << result->getValue() << endl;
-    
-    else
-        
-        cout << "No Results found" << endl;
-}
-
-// Load a list of data from a data file to tree
-void load() {
-    
-    ifstream file("data.txt");
-    
-    if (file.is_open()) {
-        
-        int a;
-        
-        while(file >> a) {
-            
-            tree->insert(a);
-        }
-        
-        cout << "Tree Generated from data file" << endl;
-        
-        file.close();
-        
-    } else {
-        cout << "Can not open data file" << endl;
-    }
-}
-
-
-//generate a tree with random numbers, ask the user to input the seed first
-void generate() {
+    int* tree;
 
     int nodes, seed, count = 0; 
-    BSTNode* result = NULL;
-    nodes = 1000;
-    // cout << "Enter number of nodes to be generated:";
-    // cin >> nodes;
+
+    cout << "Enter number of nodes to be generated:";
+    cin >> nodes;
+
+    tree = new int[nodes];
 
     cout << "Enter the seed value to generate random numbers:";
     cin >> seed;
-
-    // If you want to use a range
-    // int start, end;
-    // cout << "Enter the starting value of range:";
-    // cin >> start;
-
-    // cout << "Enter the ending value of range:";
-    // cin >> end;
-
-    // set the seed to randomizer
-    srand(seed);
-
-    int values[nodes];
-    // create an empty binary search tree
-    tree = new BinarySearchTree();
-
-    for (int i = 0; i < nodes; ++i)
-    {
-        // values[i] = (rand() % end) + start; // to generate a number between a given range
-
-        // generate a random number and store it in array
-        values[i] = rand();
-        // insert it in the tree
-        tree->insert(values[i]);
-    }
-    cout<< "Method" << "\t" << "Index" << "\t" << setw(20)   << "Search Value" << "\t" << "Retrieval Count" << endl;
-    for (int i = 1; i < 10; i++)
-    {
-        count = 0;
-        result = tree->breadthFirstSearch(values[i*100], count);
-        cout << "BFS" << "\t" << i*100 << "\t" << setw(20)   << values[i*100] << "\t" << count << endl;    
-        count = 0;    
-        result = tree->depthFirstSearch(values[i*100], count);
-        cout << "DFS" << "\t" << i*100 << "\t" << setw(20)   << values[i*100] << "\t" << count << endl;    
+	
+	srand(seed);
+    
+    for (int i = 0; i < nodes; ++i) {
+    	tree[i] = rand();
     }
 
+// left_child = tree[2 * n + 1];
+// right_child = tree[2 * n + 2];	
+    return 0;
 }
 
-void breadthFirstSearch() {
-    int value, iterations;
-
-    cout << "Enter the value to search:";
-    cin >> value;
-
-    BSTNode* result = tree->breadthFirstSearch(value,iterations);
-    if(result) cout << result << " found in " << iterations << " iterations." << endl;
-    else cout << value << " not found." << endl;
-}
-
-void depthFirstSearch() {
-    int value, iterations;
-
-    cout << "Enter the value to search:";
-    cin >> value;
-
-    BSTNode* result = tree->depthFirstSearch(value,iterations);
-    if(result) cout << result << " found in " << iterations << " iterations." << endl;
-    else cout << value << " not found." << endl;    
-}
 
 
 
