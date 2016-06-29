@@ -15,30 +15,16 @@
 
 using namespace std;
 
+int* tree;
+
 enum level
 {
     MIN, MAX
 };
 
 
-int maxValue(int node1, int node2) {
-    int max = node1;
-    if(node2 > max) max = node2;
-    return max;
-}
-
-int minValue(int node1, int node2) {
-    int min = node1;
-    if(node2 < min) min = node2;
-    return min;
-}
-    
-
-
 int main(int argc, char **argv) {
     
-    int* tree;
-
     int n, seed; 
     level state;
 
@@ -85,7 +71,8 @@ int main(int argc, char **argv) {
     }
 
     int nodesLeft = n;
-    
+
+    // minimax - alphabeta
     for (int i = levels; i >= 0; i--)
     {
         int nodesInThisLevel = pow(2, i);
@@ -95,18 +82,23 @@ int main(int argc, char **argv) {
             for (int j = levelStart; j < levelEnd; j+=2)
             {
                 int parent = (j - 1 ) / 2 ;
-                // cout << "Parent:" << parent << endl;
-                if(levelStates[i] == MAX)
-                    tree[parent] = minValue(tree[2*parent+1], tree[2*parent+2]);
-                else if(levelStates[i] == MIN)
-                    tree[parent] = maxValue(tree[2*parent+1], tree[2*parent+2]);
+                if(levelStates[i-1] == MIN) {
+                    int alpha = tree[2*parent+1];
+                    if(tree[2*parent+2] < alpha) alpha = tree[2*parent+2];
+                    tree[parent] = alpha;
+                }
+                else if(levelStates[i-1] == MAX) {
+                    int beta = tree[2*parent+1];
+                    if(tree[2*parent+2] > beta) beta = tree[2*parent+2];
+                    tree[parent] =beta;
+                }
             }
 
             nodesLeft = nodesLeft - nodesInThisLevel; 
         }
     }
     
-    cout << "Tree after MINIMAX" << endl;
+    cout << "Tree after MiniMax - AlphaBeta" << endl;
     for (int i = 0; i < n; ++i)
     {
         cout << tree[i] << endl;
