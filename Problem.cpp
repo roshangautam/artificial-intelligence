@@ -149,10 +149,7 @@ bool Problem::ac3() {
             if(temp.variable1->cardinality() == 0) 
                 consistent = false;
             else {
-                for (int i = 0; i < UNIVERSE; ++i)
-                {
-                    /* code */
-                }
+
                 // create new constraints and add them back to the queue
             }
         }
