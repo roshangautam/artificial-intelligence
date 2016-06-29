@@ -30,7 +30,7 @@ public:
 	int cardinality() const;
 	void print();
 	void clear();
-	
+	void remove(int);
 	//union
 	Set operator + (const Set&) const;
 	//difference

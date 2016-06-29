@@ -71,8 +71,19 @@ enum COLOR
     RED = 1,
     BLUE = 2,
     YELLOW = 3,
-    WHITE = 4
+    IVORY = 4
+};
+
+enum Relation
+{
+    RIGHTOF,
+    NEXTTO
 };
 
 
-
+struct BinaryConstraint
+{
+    Set* variable1;
+    Set* variable2;
+    Relation relation;
+};

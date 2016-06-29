@@ -12,6 +12,7 @@
 
 using namespace std;
 
+
 const char* nationalities[] = { "English", "Spanish", "Ukranian", "Japanese", "Norwegian"};
 const char* pets[] = { "Dog", "Horse", "Fox", "Zebra", "Snails"};
 const char* drinks[] = { "Coffee", "Tea", "Water", "Milk", "OJ"};
@@ -21,7 +22,8 @@ const char* colors[] = { "Green", "Red", "Blue", "Yellow", "White"};
 
 Problem zebraWater;
 
+
 int main(int argc, char **argv) {
-	    
+	zebraWater.ac3();
 	return 0;
 } 

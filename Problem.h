@@ -57,7 +57,11 @@ class Problem {
     Set cigarettesDrinks[5];
     Set cigarettesNationality[5];
 
+    BinaryConstraint constraints[4];
+
 public:
     Problem();  
+    bool ac3();
+    bool revise(BinaryConstraint);
 };
 

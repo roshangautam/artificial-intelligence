@@ -8,12 +8,13 @@
 
 #ifndef Problem_cpp
 #define Problem_cpp
-
+#include <queue>
 #include"Problem.h"
 
 #endif /* Problem_cpp */
 
 Problem::Problem() {
+    
     cout << "Zebra Water Problem Initialized" << endl;
 
     //The Englishman lives in the red house.
@@ -21,7 +22,7 @@ Problem::Problem() {
     colorsNationality[GREEN] = colorsNationality[RED] - colorsNationality[GREEN];
     colorsNationality[BLUE] = colorsNationality[RED] - colorsNationality[BLUE];
     colorsNationality[YELLOW] = colorsNationality[RED] - colorsNationality[YELLOW];
-    colorsNationality[WHITE] = colorsNationality[RED] - colorsNationality[WHITE];
+    colorsNationality[IVORY] = colorsNationality[RED] - colorsNationality[IVORY];
 
     //The Spaniard owns the dog.
     petsNationality[DOG] = SPANISH;
@@ -86,4 +87,94 @@ Problem::Problem() {
     nationalityCigarettes[ENGLISH] = nationalityCigarettes[JAPANESE] - nationalityCigarettes[ENGLISH];
     nationalityCigarettes[SPANISH] = nationalityCigarettes[JAPANESE]- nationalityCigarettes[SPANISH];
     nationalityCigarettes[UKRANIAN] = nationalityCigarettes[JAPANESE] - nationalityCigarettes[UKRANIAN];
+
+
+    constraints[1].variable1 = &colorsPosition[GREEN];
+    constraints[1].variable2 = &colorsPosition[IVORY];
+    constraints[1].relation = RIGHTOF;
+
+    constraints[2].variable1 = &colorsPosition[GREEN];
+    constraints[2].variable2 = &colorsPosition[IVORY];
+    constraints[2].relation = RIGHTOF;
+
+    constraints[3].variable1 = &colorsPosition[GREEN];
+    constraints[3].variable2 = &colorsPosition[IVORY];
+    constraints[3].relation = RIGHTOF;
+
+    constraints[4].variable1 = &colorsPosition[GREEN];
+    constraints[4].variable2 = &colorsPosition[IVORY];
+    constraints[4].relation = RIGHTOF;            
+}
+
+bool Problem::ac3() {
+
+    bool consistent = true;
+
+    queue<BinaryConstraint> constraints;
+    
+    BinaryConstraint temp;
+
+    constraints.push(c1);
+    // constraints.push(c2);
+    // constraints.push(c3);
+    // constraints.push(c4);
+
+    while(!constraints.empty()) {
+
+        temp = constraints.front();
+
+        constraints.pop();
+        if(revise(temp)) {
+            if(temp.variable1->cardinality() == 0) 
+                consistent = false;
+            else {
+                // create new constraints and add them back to the queue
+            }
+        }
+
+        temp.variable1->print();
+        cout << endl;
+        temp.variable2->print();
+        cout << endl;
+    }
+
+
+    return consistent;
+}
+
+bool Problem::revise(BinaryConstraint constraint) {
+
+    bool revised = false;
+    bool satisfied;
+
+    for (int i = 0; i < UNIVERSE; ++i)
+    {
+        satisfied = false;
+
+        for (int j = 0; j < UNIVERSE; ++j)
+        {
+           if (constraint.variable2->memberOf(j))
+           {
+                switch (constraint.relation) {
+                    case RIGHTOF:
+                        if( i == j + 1)
+                            satisfied = true;
+                        break;
+                    case NEXTTO:
+                        if( i == j - 1 || i == j + 1)
+                            satisfied = true;
+                        break;
+                    default:
+                        break;
+                } 
+           }
+        }
+
+        if(!satisfied) {
+            constraint.variable1->remove(i);
+            revised = true;
+        }
+
+    }
+    return revised;
 }

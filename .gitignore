@@ -1,4 +1,4 @@
 *.o
 *.dsym
-BST
+CSP
 .DS_Store

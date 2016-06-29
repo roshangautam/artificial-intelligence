@@ -27,6 +27,10 @@ void Set::clear() {
 	}
 }
 
+void Set::remove(int i) {
+	elements[i] = false;
+}
+
 void Set::operator = (int i) {
 	clear();
 	elements[i] = true;
@@ -50,15 +54,11 @@ int Set::cardinality() const {
 }
 
 void Set::print() {
-	int total = cardinality();
 	cout << '{';
-	for (int i = 0; i <= UNIVERSE; ++i)
+	for (int i = 0; i < UNIVERSE; ++i)
 	{
-		if(elements[i]) {
-			cout << i;
-			total--;
-			if(total > 0) cout << ", ";
-		}
+		cout << elements[i];
+		if(i < UNIVERSE - 1) cout << ", ";
 	}
 	cout << "}" << endl;
 }
