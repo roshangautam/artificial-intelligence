@@ -32,6 +32,7 @@ int minValue(int node1, int node2) {
     if(node2 < min) min = node2;
     return min;
 }
+    
 
 
 int main(int argc, char **argv) {
@@ -41,10 +42,13 @@ int main(int argc, char **argv) {
     int n, seed; 
     level state;
 
-    cout << "Enter number of nodes to be generated:";
+    cout << "Enter number of nodes to be generated. Please input number of nodes such that the tree is a complete tree for e.g. 15 or 31:";
     cin >> n;
 
     tree = new int[n];
+    int leaves = (n + 1) / 2;
+    int height = floor(log(n));
+    int levels = height + 1;
 
     for (int i = 0; i < n; ++i)
     {
@@ -65,11 +69,6 @@ int main(int argc, char **argv) {
     {
         cout << tree[i] << endl;
     }
-    cout << endl;
-
-    // int leaves = (n + 1) / 2;
-    int height = floor(log(n));
-    int levels = height + 1;
     
     level* levelStates = new level[levels];
     level currentState;
@@ -92,18 +91,19 @@ int main(int argc, char **argv) {
         int nodesInThisLevel = pow(2, i);
         int levelStart = nodesLeft - nodesInThisLevel;
         int levelEnd = levelStart + nodesInThisLevel;
-        cout << levelStart << ":" << levelEnd << endl;
-        for (int j = levelStart; j < levelEnd; j+=2)
-        {
-            int parent = (j - 1 ) / 2 ;
-            cout << "Parent:" << parent << endl;
-            if(levelStates[i] == MAX)
-                tree[parent] = minValue(tree[2*parent+1], tree[2*parent+2]);
-            else if(levelStates[i] == MIN)
-                tree[parent] = maxValue(tree[2*parent+1], tree[2*parent+2]);
-        }
+        if(nodesInThisLevel > 1) { // if theres only 1 node in this level i.e. this is root level
+            for (int j = levelStart; j < levelEnd; j+=2)
+            {
+                int parent = (j - 1 ) / 2 ;
+                // cout << "Parent:" << parent << endl;
+                if(levelStates[i] == MAX)
+                    tree[parent] = minValue(tree[2*parent+1], tree[2*parent+2]);
+                else if(levelStates[i] == MIN)
+                    tree[parent] = maxValue(tree[2*parent+1], tree[2*parent+2]);
+            }
 
-        nodesLeft = nodesLeft - nodesInThisLevel;
+            nodesLeft = nodesLeft - nodesInThisLevel; 
+        }
     }
     
     cout << "Tree after MINIMAX" << endl;
