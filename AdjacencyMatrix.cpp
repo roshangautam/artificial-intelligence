@@ -14,7 +14,7 @@
 #include <climits>
 #include <algorithm>
 #include <list>
-#include <vector>
+#include <unordered_map>
 #include "AdjacencyMatrix.h"
 #include "Stack.h"
 #include "Queue.h"
@@ -440,58 +440,65 @@ void AdjacencyMatrix::aStar(int source, int destination) {
 
 	// create an empty frontier queue, we will use it a priority queue by adding things at head
 	Queue frontier;
-	vector<int> path;
+	
+	unordered_map<int, unordered_map<int, int> > path;
+	unordered_map<int, unordered_map<int, int> > parentCost;
+	unordered_map<int, unordered_map<int, int> > pathCost;
 
-	int current = source;
+	int current = source, currentC = 0;
 
-	int pathCost = 0;
+	path[source][0] = source;
+	parentCost[source][hsld[source]] = hsld[source];
+	pathCost[source][hsld[source]] = 0;
 
-	// reinitialize the visited array
-	initVisited();
+	explored.clear();
 
-	cout << endl << "GBFS Begins" << endl;
+	cout << endl << "AStar Begins" << endl;
+
 	// push the start vertex to stack
-	frontier.priority(source, pathCost + hsld[source]);
+	frontier.priority(source, pathCost[source][hsld[source]] + hsld[source]);
+
 	cout << endl << "Queue" << endl;
 	frontier.print();
 	cout << endl;
-	int counter = 0;
+
 	while(!frontier.empty()) {
-		pathCost = frontier.getHead()->getCost();
+
+		currentC = frontier.getHead()->getCost();
 		current = frontier.dequeue();
-		path.push_back(current);
+		
 		if(current == destination) break;
-		// get all children in sorted order such that lowest cost is on top
+		// get all children 
 		int count = countChildren(current);
 		int* children = getChildren(current);
+
 		for (int i = 0; i < count; ++i) {
-			int cost = hsld[children[i]];
 
-			if(path.size() > 1) {
-				int iterator = 0;
-				for (int j = 0; j < path.size() - 1 ; j++) {
-					if (children[i] == path.at(j)) break;
-					if(vertices[path.at(j)][path.at(j+1)] < INT_MAX)
-						cost += vertices[path.at(j)][path.at(j+1)];
-				}
-				cost += vertices[children[i]][path.at(path.size()-1)];
-			}
-			else 
-				cost += vertices[path.at(0)][children[i]];
-
-			if(!explored[children[i]][cost]) {
-				frontier.priority(children[i], cost);
-				explored[children[i]][cost] = true;
+			int cost = pathCost[current][currentC] + vertices[current][children[i]];
+			if(!explored[children[i]][cost + hsld[children[i]]]) {
+				pathCost[children[i]][cost+hsld[children[i]]] = cost;
+				path[children[i]][cost+hsld[children[i]]] = current;
+				parentCost[children[i]][cost+hsld[children[i]]] = currentC;
+				frontier.priority(children[i], cost + hsld[children[i]]);
+				explored[children[i]][cost+ hsld[children[i]]] = true;
 			}
 
 		}
+
 		cout << "Queue" << endl;
 		frontier.print();
 		cout << endl;
-		counter++;
+		
 	}
-	cout << endl << "AStar Path:" << endl;
 
-	for (int i = 0; i < path.size(); i++)
-		printf("%c\n", path.at(i) + 'A');
+	cout << endl << "AStar Path:" << endl;
+	int p = destination;	
+	int temp;
+	while(true) {
+		printf("%c\n", p + 'A');
+		if(p == source) break;		
+		temp = p;
+		p = path[temp][currentC];
+		currentC = parentCost[temp][currentC];
+	}	
 }
