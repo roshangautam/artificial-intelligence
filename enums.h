@@ -77,6 +77,7 @@ enum COLOR
 enum Relation
 {
     RIGHTOF,
+    LEFTOF,
     NEXTTO
 };
 

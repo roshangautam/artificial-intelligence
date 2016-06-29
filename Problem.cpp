@@ -89,21 +89,37 @@ Problem::Problem() {
     nationalityCigarettes[UKRANIAN] = nationalityCigarettes[JAPANESE] - nationalityCigarettes[UKRANIAN];
 
 
-    constraints[1].variable1 = &colorsPosition[GREEN];
-    constraints[1].variable2 = &colorsPosition[IVORY];
-    constraints[1].relation = RIGHTOF;
+    c1.variable1 = &colorsPosition[GREEN];
+    c1.variable2 = &colorsPosition[IVORY];
+    c1.relation = RIGHTOF;
 
-    constraints[2].variable1 = &colorsPosition[GREEN];
-    constraints[2].variable2 = &colorsPosition[IVORY];
-    constraints[2].relation = RIGHTOF;
+    c2.variable1 = &colorsPosition[IVORY];
+    c2.variable2 = &colorsPosition[GREEN];
+    c2.relation = LEFTOF;
 
-    constraints[3].variable1 = &colorsPosition[GREEN];
-    constraints[3].variable2 = &colorsPosition[IVORY];
-    constraints[3].relation = RIGHTOF;
+    c3.variable1 = &cigarettesPosition[CHESTERFIELDS];
+    c3.variable2 = &petsPosition[FOX];
+    c3.relation = NEXTTO;
 
-    constraints[4].variable1 = &colorsPosition[GREEN];
-    constraints[4].variable2 = &colorsPosition[IVORY];
-    constraints[4].relation = RIGHTOF;            
+    c4.variable1 = &petsPosition[FOX];
+    c4.variable2 = &cigarettesPosition[KOOLS];
+    c4.relation = NEXTTO; 
+
+    c5.variable1 = &cigarettesPosition[KOOLS];
+    c5.variable2 = &petsPosition[HORSE];
+    c5.relation = NEXTTO;
+
+    c6.variable1 = &petsPosition[HORSE];
+    c6.variable2 = &cigarettesPosition[KOOLS];
+    c6.relation = NEXTTO; 
+
+    c7.variable1 = &nationalityPosition[NORWEGIAN];
+    c7.variable2 = &colorsPosition[BLUE];
+    c7.relation = NEXTTO;
+
+    c8.variable1 = &colorsPosition[BLUE];
+    c8.variable2 = &nationalityPosition[NORWEGIAN];
+    c8.relation = NEXTTO; 
 }
 
 bool Problem::ac3() {
@@ -111,23 +127,32 @@ bool Problem::ac3() {
     bool consistent = true;
 
     queue<BinaryConstraint> constraints;
-    
+    constraints.push(c1);
+    constraints.push(c2);
+    constraints.push(c3);
+    constraints.push(c4);
+    constraints.push(c5);
+    constraints.push(c6);    
+    constraints.push(c7);
+    constraints.push(c8); 
+
     BinaryConstraint temp;
 
-    constraints.push(c1);
-    // constraints.push(c2);
-    // constraints.push(c3);
-    // constraints.push(c4);
-
+   
     while(!constraints.empty()) {
 
         temp = constraints.front();
 
         constraints.pop();
+
         if(revise(temp)) {
             if(temp.variable1->cardinality() == 0) 
                 consistent = false;
             else {
+                for (int i = 0; i < UNIVERSE; ++i)
+                {
+                    /* code */
+                }
                 // create new constraints and add them back to the queue
             }
         }
@@ -150,7 +175,6 @@ bool Problem::revise(BinaryConstraint constraint) {
     for (int i = 0; i < UNIVERSE; ++i)
     {
         satisfied = false;
-
         for (int j = 0; j < UNIVERSE; ++j)
         {
            if (constraint.variable2->memberOf(j))
@@ -160,8 +184,12 @@ bool Problem::revise(BinaryConstraint constraint) {
                         if( i == j + 1)
                             satisfied = true;
                         break;
+                    case LEFTOF:
+                        if( i == j - 1)
+                            satisfied = true;
+                        break;                        
                     case NEXTTO:
-                        if( i == j - 1 || i == j + 1)
+                        if( i == j - 1 || i == j + 1) 
                             satisfied = true;
                         break;
                     default:
@@ -174,7 +202,6 @@ bool Problem::revise(BinaryConstraint constraint) {
             constraint.variable1->remove(i);
             revised = true;
         }
-
     }
     return revised;
 }

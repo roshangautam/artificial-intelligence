@@ -57,7 +57,14 @@ class Problem {
     Set cigarettesDrinks[5];
     Set cigarettesNationality[5];
 
-    BinaryConstraint constraints[4];
+    BinaryConstraint c1;
+    BinaryConstraint c2;
+    BinaryConstraint c3;
+    BinaryConstraint c4;
+    BinaryConstraint c5;
+    BinaryConstraint c6;
+    BinaryConstraint c7;
+    BinaryConstraint c8;
 
 public:
     Problem();  
