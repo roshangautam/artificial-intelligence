@@ -1,18 +1,20 @@
 CC=gcc
 CXX=g++
 RM=rm -f
-SRCS=Main.cpp
+SRCS=Main.cpp WumpusEnvironment.cpp
 OBJS=$(subst .cc,.o,$(SRCS))
 
-all: MINIMAX
+all: WUMPUS
 
-MINIMAX: $(OBJS)
-	$(CXX) $(LDFLAGS) -o MINIMAX $(OBJS) $(LDLIBS) 
+WUMPUS: $(OBJS)
+	$(CXX) $(LDFLAGS) -o WUMPUS $(OBJS) $(LDLIBS) 
 
-MINIMAX.o: main.cpp
+WUMPUS.o: main.cpp WumpusEnvironment.h
+
+WumpusEnvironment.o: WumpusEnvironment.cpp
 
 clean:
 	$(RM) $(OBJS)
 
 dist-clean: clean
-	$(RM) MINIMAX
+	$(RM) WUMPUS

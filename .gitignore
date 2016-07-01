@@ -1,4 +1,4 @@
 *.o
 *.dsym
-MINIMAX
+WUMPUS
 .DS_Store
