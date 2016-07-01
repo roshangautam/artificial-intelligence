@@ -22,7 +22,7 @@ WumpusEnvironment::WumpusEnvironment() {
 
     int count = 1;
 	
-	cout << "Knowlege Based Agent Demonstration - Wumpus World" << endl;
+	cout << "Knowledge Based Agent Demonstration - Wumpus World" << endl;
     
     for (int i = 0; i < 4; ++i) {
         cout << endl;
